@@ -1,0 +1,493 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+@media (max-width: 1606px) {
+  .filter-container {
+    align-items: center;
+  }
+}
+
+@media (max-width: 1440px) {
+  .rental-cards-wrapper {
+    justify-content: center;
+  }
+  .rental-cards-wrapper .rental-card {
+    width: 66%;
+  }
+  .filter-container {
+    margin-block: 40px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filter-container .pickup-dropoff {
+    justify-content: center;
+    gap: 24px;
+    margin-block: 0;
+    padding: 16px 18px !important;
+  }
+}
+
+@media (max-width: 1211px) {
+  .checkout-page {
+    & .grid-container {
+      grid-template-columns: 1fr 470px;
+
+      & form {
+        & fieldset {
+          header {
+            legend {
+              flex-basis: 70%;
+            }
+            span {
+              align-self: self-start;
+            }
+          }
+
+          & .input-grid {
+            grid-template-columns: 1fr;
+          }
+
+          &.payment-info label {
+            grid-column: span 2;
+          }
+
+          .confirmation-wrapper {
+            padding: 16px;
+            &:first-of-type {
+              margin-bottom: 20px;
+            }
+
+            label {
+              gap: 1rem;
+              font-size: 12px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1160px) {
+  body.detail-page {
+    section.car-details {
+      .photo-wrapper {
+        .preview {
+          max-width: 400px;
+          line-height: 1.4;
+
+          p {
+            margin-top: 20px;
+          }
+
+          .main-img-wrapper {
+            img {
+              width: 100%;
+            }
+          }
+        }
+
+        .thumbnails-wrapper {
+          gap: 16px;
+          justify-content: space-between;
+
+          .thumbnail-item {
+            width: 120px;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1120px) {
+  .navigation .logo-search-wrapper input {
+    width: 340px;
+  }
+  .rental-cards-wrapper .rental-card {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1060px) {
+  body.detail-page {
+    section.car-details {
+      .photo-description-wrapper {
+        flex-direction: column;
+        align-items: center;
+
+        .photo-wrapper {
+          background-color: $secondary-color;
+          padding: 16px;
+          border-radius: 10px;
+          .preview {
+            max-width: 600px;
+            width: 100%;
+          }
+
+          .thumbnails-wrapper {
+            .thumbnail-item {
+              width: 148px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  body.checkout-page {
+    .grid-container {
+      grid-template-columns: 1fr;
+
+      main {
+        padding-inline: 2rem;
+      }
+      aside {
+        grid-row: 1;
+        padding-inline: 2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 940px) {
+  .main-page {
+    .navigation {
+      padding: 0 0 80px 0;
+
+      .logo-search-wrapper {
+        order: 0;
+
+        form {
+          left: calc(50% - 50px);
+          transform: translateX(-50%);
+          top: 90px;
+        }
+      }
+    }
+  }
+
+  .filters-page {
+    .navigation .logo-search-wrapper form {
+      left: calc(50% - 40px);
+      transform: translateX(-50%);
+
+      a {
+        border: solid 1px rgba(195, 212, 233, 0.4);
+        border-radius: 10px;
+        right: -80px;
+        padding: 12px;
+      }
+    }
+  }
+
+  .checkout-page {
+    header .navigation {
+      padding-block: 0;
+
+      .logo-search-wrapper {
+        order: 0;
+        margin-block: 0;
+      }
+    }
+    .grid-container {
+      form fieldset header {
+        padding: 0;
+      }
+    }
+  }
+
+  header {
+    padding: 24px;
+  }
+  .navigation {
+    position: relative;
+    padding-bottom: 100px;
+  }
+  .navigation .logo-search-wrapper a {
+    padding-left: 0;
+  }
+
+  .navigation .logo-search-wrapper form {
+    position: absolute;
+    left: 34px;
+    top: 80px;
+    transform: none;
+  }
+
+  .navigation .logo-search-wrapper input {
+    width: 370px;
+    height: 48px;
+    padding: 12px;
+    padding-left: 60px;
+    border-radius: 10px;
+  }
+
+  .navigation .logo-search-wrapper .filter-svg img {
+    height: 48px;
+    padding: 12px;
+    border: solid 1px rgba(195, 212, 233, 0.4);
+    border-radius: 10px;
+  }
+
+  .navigation .logo-search-wrapper .filter-svg {
+    right: -80px;
+  }
+
+  .rental-cards-wrapper .rental-card {
+    width: 100%;
+  }
+
+  header {
+    .navigation {
+      flex-wrap: wrap;
+      .burger {
+        display: block;
+        width: 90%;
+      }
+      .logo-search-wrapper {
+        margin-block: 20px;
+        order: 2;
+        form {
+          top: 150px;
+        }
+      }
+      .cta-wrapper {
+        width: 10%;
+        justify-content: flex-end;
+        & a:not(:last-child) {
+          display: none;
+        }
+      }
+    }
+  }
+  body.filters-page {
+    .grid-container {
+      grid-template-columns: 1fr;
+      position: relative;
+      & aside {
+        position: absolute;
+        z-index: 1;
+        width: 90%;
+        top: 0;
+        left: -50%;
+        transform: translateX(-50%);
+        background-color: $secondary-color;
+      }
+    }
+  }
+
+    body.detail-page {
+      section.car-details {
+        .reviews-container {
+          header {
+            padding: 0;
+          }
+        }
+      }
+    }
+}
+
+@media (max-width: 768px) {
+  .rental-cards-wrapper .car-img-container {
+    max-width: 340px;
+    width: 90%;
+    height: unset;
+    & img {
+      width: 100%;
+    }
+  }
+  .filter-container .pickup-dropoff {
+    width: unset;
+    padding: 16px 24px;
+  }
+  .car-categories .cars-wrapper {
+    justify-content: center;
+  }
+}
+
+
+@media (max-width: 650px) {
+  body.detail-page {
+
+      padding-inline: 20px;
+
+      section.car-details {
+        .photo-description-wrapper {
+          .description-wrapper {
+            padding: 16px;
+
+            .description-body{
+              p {
+                font-weight: 500;
+                font-size: 17px;
+                margin-block: 12px;
+                line-height: 1.5;
+              }
+
+              .specifications-grid-wrapper {
+                column-gap: 70px;
+                & > div {
+                  .property, .value {
+                    font-size: 17px;
+                  }
+
+                }
+              }
+            }
+          }
+        }
+      }
+
+  }
+}
+
+@media (max-width: 599px) {
+  body.checkout-page {
+    .grid-container {
+      main {
+        padding-inline: 1rem;
+      }
+      aside {
+        padding-inline: 1rem;
+
+        .order-summary {
+          padding: 12px;
+        }
+      }
+    }
+  }
+
+  .navigation .logo-search-wrapper input {
+    width: 290px;
+  }
+
+  .navigation .cta-wrapper a:not(:last-child) {
+    display: none;
+  }
+
+  main {
+    padding: 20px 8px;
+
+    .car-categories .car-container {
+      width: 100%;
+      max-width: 328px;
+    }
+
+    .car-categories {
+      .cars-wrapper {
+        justify-content: center !important;
+      }
+    }
+  }
+  .filter-container .pickup-dropoff {
+    padding: 16px;
+  }
+  .filter-container .pickup-dropoff .filter .filter-section {
+    padding-inline: 10px !important;
+  }
+  .recomendation-car .cars-wrapper .car-container .image-specs-wrapper {
+    flex-direction: row;
+    gap: 20px;
+    & .car-description {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  body.detail-page {
+    section.car-details {
+      .photo-description-wrapper {
+          .photo-wrapper {
+
+            .thumbnails-wrapper {
+              .thumbnail-item {
+                width: auto;
+              }
+            }
+          }
+
+          .description-wrapper {
+            .description-body {
+
+              .specifications-grid-wrapper {
+                column-gap: 20px
+              }
+            }
+          }
+        }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .navigation {
+    padding-bottom: 100px;
+    padding-inline: 10px;
+  }
+
+  .navigation .logo-search-wrapper input {
+    width: 100%;
+  }
+  .filter-container {
+    gap: 8px;
+  }
+  .filter-container .pickup-dropoff {
+    padding: 4px;
+  }
+
+  .filter-container .pickup-dropoff .filter .filter-section {
+    padding-inline: 4px !important;
+  }
+
+
+}
+
+@media (max-width: 400px) {
+  .checkout-page {
+    .grid-container {
+      form fieldset {
+        padding: 12px;
+
+        .input-grid {
+          gap: 24px;
+
+          &:first-of-type {
+            margin-bottom: 1rem;
+          }
+
+          label input,
+          .pickup-location-wrapper select {
+            padding: 12px 24px;
+            height: 48px;
+          }
+        }
+      }
+
+      aside .order-summary {
+        .total span:last-child {
+          font-size: 24px;
+        }
+
+        .product-wrapper {
+          img {
+            width: 100px;
+          }
+
+          .product-info h3 {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+
+    footer {
+      padding-inline: 1rem;
+    }
+  }
+}

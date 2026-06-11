@@ -1,0 +1,101 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use "../abstracts/animations" as *;
+
+.navigation {
+  @include flex-between();
+  margin: 0 auto;
+  padding: 22px 32px;
+  .burger {
+    display: none;
+    input {
+      opacity: 0;
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+    svg {
+      pointer-events: none;
+    }
+  }
+  .logo-search-wrapper {
+    @include flex-center();
+    gap: 65px;
+    & > a {
+      font-weight: 500;
+      color: $primary-color-500;
+      font-size: $secondary-heading-size;
+      text-transform: uppercase;
+      padding-left: 32px;
+    }
+
+    input {
+      border: solid 1px #c3d4e966;
+      border-radius: 70px;
+      width: 492px;
+      padding: 8px 58px;
+    }
+
+    form {
+      > img {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        &:first-of-type {
+          left: 20px;
+        }
+      }
+      a {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+      }
+    }
+  }
+
+  .cta-wrapper {
+    display: flex;
+    gap: 20px;
+
+    a:not(:last-child) {
+      @include flex-center();
+      border: 1px solid #c3d4e966;
+      height: 44px;
+      width: 44px;
+      border-radius: 50%;
+    }
+
+    :last-child {
+      border-radius: 50%;
+    }
+  }
+
+  .notification-button {
+    position: relative;
+
+    &::after {
+      content: "";
+      width: 11px;
+      height: 11px;
+      top: 2px;
+      right: 2px;
+      background-color: #ff4423;
+      border-radius: 50%;
+      position: absolute;
+    }
+  }
+
+  .settings-button:hover {
+    animation: rotate 1s linear;
+  }
+
+  .notification-button:hover {
+    animation: bell-shake 0.8s ease-in-out;
+  }
+
+  .heart-button:hover {
+    animation: heartbeat 0.8s ease-in-out;
+  }
+}

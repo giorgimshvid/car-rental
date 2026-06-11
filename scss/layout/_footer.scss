@@ -1,0 +1,94 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+footer {
+  padding: 60px 80px;
+
+  @media (max-width: 776px) {
+    padding-inline: 30px;
+  }
+
+  .footer-inner-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #13131329;
+    padding-bottom: 36px;
+    gap: 60px;
+
+    .logo-wrapper {
+      max-width: 292px;
+      a {
+        display: block;
+        margin-bottom: 16px;
+
+        font-weight: 500;
+        color: $primary-color-500;
+        font-size: $secondary-heading-size;
+        text-transform: uppercase;
+      }
+
+      p {
+        color: $secondary-color-300;
+      }
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 60px;
+
+      .about,
+      .community,
+      .socials {
+        h2 {
+          color: $secondary-color-500;
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 24px;
+        }
+
+        li:not(:last-child) {
+          margin-bottom: 16px;
+        }
+
+        a {
+          color: $secondary-color-300;
+        }
+      }
+    }
+  }
+
+  .copy {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 36px;
+    gap: 60px;
+
+    p {
+      font-weight: 500;
+      white-space: nowrap;
+
+      @media (max-width: 776px) {
+        order: 1;
+      }
+    }
+
+    div {
+      display: flex;
+      gap: 30px;
+
+      @media (max-width: 776px) {
+        @include flex-between();
+        width: 100%;
+      }
+
+      a {
+        color: $secondary-color-500;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+    }
+  }
+}

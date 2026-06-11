@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="assets/css/index.css" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Car Rental Website</title>
+  </head>
+
+  <body class="main-page">
+    <header>
+      <nav class="navigation">
+        <div class="logo-search-wrapper">
+          <a href="index.html">Morent</a>
+          <form action="">
+            <img src="assets/images/icons/search.svg" alt="Search icon" />
+            <input type="text" placeholder="Search something here" id="search-input" />
+            <a class="filter-svg" href="filter.html">
+              <img src="assets/images/icons/filter.svg" alt="Filter icon" />
+            </a>
+          </form>
+        </div>
+
+        <div class="cta-wrapper">
+          <a href=""
+            ><img
+              class="heart-button"
+              src="assets/images/icons/heart.svg"
+              alt="heart"
+              width="24px"
+          /></a>
+          <a class="notification-button"
+            ><img
+              src="assets/images/icons/notification.svg"
+              alt="notifications"
+              width="24px"
+          /></a>
+          <a href=""
+            ><img
+              class="settings-button"
+              src="assets/images/icons/setting.svg"
+              alt="settings"
+              width="24px"
+          /></a>
+          <a href=""
+            ><img
+              src="assets/images/icons/profile photo.png"
+              alt="Profile"
+              width="44px"
+          /></a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="rental-cards-wrapper">
+        <div class="rental-card rental-card-left">
+          <div class="circle-1"></div>
+          <div class="circle-2"></div>
+          <div class="circle-3"></div>
+          <div class="circle-4"></div>
+          <div class="circle-5"></div>
+          <div class="circle-6"></div>
+
+          <div class="text-wrapper">
+            <h1>The Best Platform for Car Rental</h1>
+            <p>
+              Ease of doing a car rental safely and reliably. Of course at a low
+              price.
+            </p>
+            <div>
+              <button>Rental Car</button>
+              <section class="car-img-container">
+                <img src="assets/images/cars/rental card left car.svg" />
+              </section>
+            </div>
+          </div>
+        </div>
+
+        <div class="rental-card rental-card-right">
+          <div class="line-1">
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+          </div>
+          <div class="line-2">
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+          </div>
+          <div class="line-3">
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+            <div class="polygon"></div>
+          </div>
+
+          <div class="text-wrapper">
+            <h1>Easy way to rent a car at a low price</h1>
+            <p>
+              Providing cheap car rental services and safe and comfortable
+              facilities.
+            </p>
+            <div>
+              <button>Rental Car</button>
+              <section class="car-img-container">
+                <img src="assets/images/cars/rental card right car.svg" />
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="filter-container">
+        <div class="pickup-dropoff">
+          <label class="checkbox">
+            <input type="radio" name="pickup-selector" value="pickup" />
+            <span class="custom-radio"> Pick-Up </span>
+          </label>
+
+          <div class="filter">
+            <div class="filter-section">
+              <h3>Locations</h3>
+              <div class="select-wrapper">
+                <select name="city">
+                  <option value="">Select your city</option>
+                  <option value="tbilisi">Tbilisi</option>
+                  <option value="batumi">Batumi</option>
+                  <option value="kutaisi">Kutaisi</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="filter-section">
+              <h3>Date</h3>
+              <input
+                type="date"
+                name="pickup-date"
+                placeholder="Select your date"
+              />
+            </div>
+
+            <div class="filter-section">
+              <h3>Time</h3>
+              <input
+                type="time"
+                name="pickut-time"
+                placeholder="Select your date"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button><img src="assets/images/icons/Swap.svg" /></button>
+
+        <div class="pickup-dropoff">
+          <label class="checkbox">
+            <input type="radio" name="pickup-selector" value="pickup" />
+            <span class="custom-radio"> Drop-Off </span>
+          </label>
+
+          <div class="filter">
+            <div class="filter-section">
+              <h3>Locations</h3>
+              <div class="select-wrapper">
+                <select name="city">
+                  <option value="">Select your city</option>
+                  <option value="tbilisi">Tbilisi</option>
+                  <option value="batumi">Batumi</option>
+                  <option value="kutaisi">Kutaisi</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="filter-section">
+              <h3>Date</h3>
+              <div class="datepicker-wrapper"></div>
+              <input
+                type="date"
+                name="pickup-date"
+                placeholder="Select your date"
+              />
+            </div>
+
+            <div class="filter-section">
+              <h3>Time</h3>
+              <input
+                type="time"
+                name="pickut-time"
+                placeholder="Select your date"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="car-categories popular-car">
+        <header class="categories-header">
+          <h2>Popular Car</h2>
+          <div>View All</div>
+        </header>
+        <div class="cars-wrapper">
+          <!-- <div class="car-container">
+            <header>
+              <h2>Koenigsegg</h2>
+              <h3>Sport</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img
+                src="assets/images/cars/rental card left car.svg"
+                alt="Koenigsegg"
+              />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>90L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>2 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h2>$99.00/</h2>
+                <span>day</span>
+              </div>
+              <button>Rent Now</button>
+            </div>
+          </div>
+
+          <div class="car-container">
+            <header>
+              <h2>Nissan GT - R</h2>
+              <h3>Sport</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img
+                src="assets/images/cars/rental card right car.svg"
+                alt="Nissan GT - R"
+              />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>80L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>2 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h2>$80.00/</h2>
+                <span>day</span>
+              </div>
+              <span class="discounted-price">$100.00</span>
+              <button>Rent Now</button>
+            </div>
+          </div>
+
+          <div class="car-container">
+            <header>
+              <h2>Rolls - Royce</h2>
+              <h3>Sedan</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img
+                src="assets/images/cars/Rolls - Royce.svg"
+                alt="Rolls - Royce"
+              />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>70L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>4 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h2>$96.00/</h2>
+                <span>day</span>
+              </div>
+              <button>Rent Now</button>
+            </div>
+          </div>
+
+          <div class="car-container">
+            <header>
+              <h2>Nissan GT - R</h2>
+              <h3>Sport</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img
+                src="assets/images/cars/Nissan GT-R(2).svg"
+                alt="Nissan GT - R"
+              />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>80L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>2 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h2>$80.00/</h2>
+                <span>day</span>
+              </div>
+              <span class="discounted-price">$100.00</span>
+              <button>Rent Now</button>
+            </div>
+          </div> -->
+        </div>
+      </section>
+
+      <section class="car-categories recomendation-car" hidden>
+        <header class="categories-header">
+          <h2>Recomendation Car</h2>
+        </header>
+        <div class="cars-wrapper">
+          <div class="car-container">
+            <header>
+              <h2>All New Rush</h2>
+              <h3>SUV</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img
+                src="assets/images/cars/All New Rush.svg"
+                alt="All New Rush"
+              />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>70L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>6 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h2>$72.00/</h2>
+                <span>day</span>
+              </div>
+              <span class="discounted-price">$80.00</span>
+              <a href="detail-car.html"> <button>Rent Now</button> </a>
+            </div>
+          </div>
+
+          <div class="car-container">
+            <header>
+              <h2>CR - V</h2>
+              <h3>SUV</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img src="assets/images/cars/CR  - V.svg" alt="CR-V" />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>80L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>6 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h2>$80.00/</h2>
+                <span>day</span>
+              </div>
+              <button>Rent Now</button>
+            </div>
+          </div>
+
+          <div class="car-container">
+            <header>
+              <h2>All New Terios</h2>
+              <h3>SUV</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img
+                src="assets/images/cars/All New Terios.svg"
+                alt="All New Terios"
+              />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>90L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>6 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h2>$74.00/</h2>
+                <span>day</span>
+              </div>
+              <button>Rent Now</button>
+            </div>
+          </div>
+
+          <div class="car-container">
+            <header>
+              <h2>CR - V</h2>
+              <h3>SUV</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img src="assets/images/cars/CR  - V(2).svg" alt="CR  - V" />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>80L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>6 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h4>$80.00/</h4>
+                <span>day</span>
+              </div>
+              <button>Rent Now</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cars-wrapper">
+          <div class="car-container">
+            <header>
+              <h2>MG ZX Exclusice</h2>
+              <h3>Hatchback</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img
+                src="assets/images/cars/MG ZX Exclusice.svg"
+                alt="MG ZX Exclusice"
+              />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>70L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>4 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h2>$76.00/</h2>
+                <span>day</span>
+              </div>
+              <span class="discounted-price">$80.00</span>
+              <button>Rent Now</button>
+            </div>
+          </div>
+
+          <div class="car-container">
+            <header>
+              <h2>New MG ZS</h2>
+              <h3>SUV</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img src="assets/images/cars/New MG ZS.svg" alt="ew MG ZS" />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>80L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>6 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h2>$80.00/</h2>
+                <span>day</span>
+              </div>
+              <button>Rent Now</button>
+            </div>
+          </div>
+
+          <div class="car-container">
+            <header>
+              <h2>MG ZX Excite</h2>
+              <h3>Hatchback</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img
+                src="assets/images/cars/MG ZX Excite.svg"
+                alt="MG ZX Excite"
+              />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>90L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>4 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h2>$74.00/</h2>
+                <span>day</span>
+              </div>
+              <button>Rent Now</button>
+            </div>
+          </div>
+
+          <div class="car-container">
+            <header>
+              <h2>New MG ZS</h2>
+              <h3>SUV</h3>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.68998C2 5.59998 4.49 3.09998 7.56 3.09998C9.38 3.09998 10.99 3.97998 12 5.33998C13.01 3.97998 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.59998 22 8.68998C22 15.69 15.52 19.82 12.62 20.81Z"
+                  stroke="#90A3BF"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </header>
+            <div class="img-container">
+              <img
+                src="assets/images/cars/New MG ZS(2).svg"
+                alt="Nissan GT - R"
+              />
+            </div>
+            <div class="car-description">
+              <div class="container">
+                <img
+                  src="assets/images/icons/gas-station.svg"
+                  alt="gas-station"
+                />
+                <span>80L</span>
+              </div>
+              <div class="container">
+                <img src="assets/images/icons/Car.svg" alt="car" />
+                <span>Manual</span>
+              </div>
+              <div class="container">
+                <img
+                  src="assets/images/icons/profile-user.svg"
+                  alt="profile-user"
+                />
+                <span>6 People</span>
+              </div>
+            </div>
+
+            <div class="price-container">
+              <div>
+                <h2>$80.00/</h2>
+                <span>day</span>
+              </div>
+              <button>Rent Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="button-div">
+        <div>
+          <button>Show more car</button>
+          <p>120 Car</p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-inner-wrapper">
+        <div class="logo-wrapper">
+          <a href="">Morent</a>
+          <p>
+            Our vision is to provide convenience and help increase your sales
+            business.
+          </p>
+        </div>
+
+        <nav>
+          <div class="about">
+            <h2>About</h2>
+            <ul>
+              <li>
+                <a href="#">How it works</a>
+              </li>
+
+              <li>
+                <a href="#">Featured</a>
+              </li>
+              <li>
+                <a href="#">Partnership</a>
+              </li>
+              <li>
+                <a href="#">Bussiness Relation</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="community">
+            <h2>Community</h2>
+            <ul>
+              <li>
+                <a href="#">Events</a>
+              </li>
+
+              <li>
+                <a href="#">Blog</a>
+              </li>
+              <li>
+                <a href="#">Podcast</a>
+              </li>
+              <li>
+                <a href="#">Invite a friend</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="socials">
+            <h2>Socials</h2>
+            <ul>
+              <li>
+                <a href="#">Discord</a>
+              </li>
+
+              <li>
+                <a href="#">Instagram</a>
+              </li>
+              <li>
+                <a href="#">Twitter</a>
+              </li>
+              <li>
+                <a href="#">Facebook</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="copy">
+        <p>©2022 MORENT. All rights reserved</p>
+        <div>
+          <a href="#">Privacy & Policy</a>
+          <a href="#">Terms & Condition</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="assets/css/index.css" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- import noUiSlider -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.8.1/nouislider.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.8.1/nouislider.min.js"
+      defer
+    ></script>
+    <title>Car Rental Website</title>
+  </head>
+
+  <body class="filters-page">
+    <header>
+      <nav class="navigation">
+        <div class="burger">
+          <input type="checkbox" name="burger" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M3 7H21"
+              stroke="#596780"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M3 12H21"
+              stroke="#596780"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M3 17H21"
+              stroke="#596780"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <div class="logo-search-wrapper">
+          <a href="index.html">Morent</a>
+          <form action="">
+            <img src="assets/images/icons/search.svg" alt="Search icon" />
+            <input
+              type="text"
+              placeholder="Search something here"
+              id="search-input"
+            />
+            <a href="filter.html">
+              <img src="assets/images/icons/filter.svg" alt="Filter icon" />
+            </a>
+          </form>
+        </div>
+
+        <div class="cta-wrapper">
+          <a href=""
+            ><img
+              class="heart-button"
+              src="assets/images/icons/heart.svg"
+              alt="heart"
+              width="24px"
+          /></a>
+          <a class="notification-button"
+            ><img
+              src="assets/images/icons/notification.svg"
+              alt="notifications"
+              width="24px"
+          /></a>
+          <a href=""
+            ><img
+              class="settings-button"
+              src="assets/images/icons/setting.svg"
+              alt="settings"
+              width="24px"
+          /></a>
+          <a href=""
+            ><img
+              src="assets/images/icons/profile photo.png"
+              alt="Profile"
+              width="44px"
+          /></a>
+        </div>
+      </nav>
+    </header>
+    <div class="grid-container">
+      <aside>
+        <form action="#">
+          <div class="filters type-filter">
+            <span class="title">Type</span>
+          </div>
+
+          <div class="filters capacity-filter">
+            <span class="title">Capacity</span>
+          </div>
+
+          <div class="filters price-filter">
+            <span class="title">Price</span>
+            <div class="filter-wrapper">
+              <!-- <input type="range" name="" id="range" min="0" max="100" value="80" /> -->
+              <div id="slider"></div>
+              <p>
+                Min: <span id="min">20</span><br />
+                Max: <span id="max">80</span>
+              </p>
+               
+            </div>
+          </div>
+          <input type="hidden" id="priceRangeChangeDetect" value="" hidden />
+          <div class="button-wrap">
+            <button id="clearFilters" type="reset">Clear filters</button>
+          </div>
+        </form>
+      </aside>
+
+      <main>
+        <section class="filter-container">
+          <div class="pickup-dropoff">
+            <label class="checkbox">
+              <input type="radio" name="pickup-selector" value="pickup" />
+              <span class="custom-radio"> Pick-Up </span>
+            </label>
+
+            <div class="filter">
+              <div class="filter-section">
+                <h3>Locations</h3>
+                <div class="select-wrapper">
+                  <select name="city">
+                    <option value="">Select your city</option>
+                    <option value="tbilisi">Tbilisi</option>
+                    <option value="batumi">Batumi</option>
+                    <option value="kutaisi">Kutaisi</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="filter-section">
+                <h3>Date</h3>
+                <input
+                  type="date"
+                  name="pickup-date"
+                  placeholder="Select your date"
+                />
+              </div>
+
+              <div class="filter-section">
+                <h3>Time</h3>
+                <input
+                  type="time"
+                  name="pickut-time"
+                  placeholder="Select your date"
+                />
+              </div>
+            </div>
+          </div>
+
+          <button><img src="assets/images/icons/Swap.svg" /></button>
+
+          <div class="pickup-dropoff">
+            <label class="checkbox">
+              <input type="radio" name="pickup-selector" value="pickup" />
+              <span class="custom-radio"> Drop-Off </span>
+            </label>
+
+            <div class="filter">
+              <div class="filter-section">
+                <h3>Locations</h3>
+                <div class="select-wrapper">
+                  <select name="city">
+                    <option value="">Select your city</option>
+                    <option value="tbilisi">Tbilisi</option>
+                    <option value="batumi">Batumi</option>
+                    <option value="kutaisi">Kutaisi</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="filter-section">
+                <h3>Date</h3>
+                <div class="datepicker-wrapper"></div>
+                <input
+                  type="date"
+                  name="pickup-date"
+                  placeholder="Select your date"
+                />
+              </div>
+
+              <div class="filter-section">
+                <h3>Time</h3>
+                <input
+                  type="time"
+                  name="pickut-time"
+                  placeholder="Select your date"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="car-categories recomendation-car">
+          <div class="cars-wrapper"></div>
+        </section>
+      </main>
+    </div>
+    <footer>
+      <div class="footer-inner-wrapper">
+        <div class="logo-wrapper">
+          <a href="">rent now</a>
+          <p>
+            Our vision is to provide convenience and help increase your sales
+            business.
+          </p>
+        </div>
+
+        <nav>
+          <div class="about">
+            <h2>About</h2>
+            <ul>
+              <li>
+                <a href="#">How it works</a>
+              </li>
+
+              <li>
+                <a href="#">Featured</a>
+              </li>
+              <li>
+                <a href="#">Partnership</a>
+              </li>
+              <li>
+                <a href="#">Bussiness Relation</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="community">
+            <h2>Community</h2>
+            <ul>
+              <li>
+                <a href="#">Events</a>
+              </li>
+
+              <li>
+                <a href="#">Blog</a>
+              </li>
+              <li>
+                <a href="#">Podcast</a>
+              </li>
+              <li>
+                <a href="#">Invite a friend</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="socials">
+            <h2>Socials</h2>
+            <ul>
+              <li>
+                <a href="#">Discord</a>
+              </li>
+
+              <li>
+                <a href="#">Instagram</a>
+              </li>
+              <li>
+                <a href="#">Twitter</a>
+              </li>
+              <li>
+                <a href="#">Facebook</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="copy">
+        <p>©2022 MORENT. All rights reserved</p>
+        <div>
+          <a href="#">Privacy & Policy</a>
+          <a href="#">Terms & Condition</a>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="./assets/js/app.js"></script>
+  </body>
+</html>

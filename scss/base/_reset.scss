@@ -1,0 +1,32 @@
+@use "../abstracts/variables" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $primary-font;
+}
+
+form {
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+input {
+  border: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}

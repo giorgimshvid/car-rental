@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="assets/css/index.css" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Car Rental Website</title>
+  </head>
+
+  <body class="checkout-page">
+    <header class="detail-car-page">
+      <nav class="navigation">
+        <div class="logo-search-wrapper">
+          <a href="index.html">Morent</a>
+        </div>
+
+        <div class="cta-wrapper">
+          <a href=""
+            ><img
+              class="heart-button"
+              src="assets/images//icons/heart.svg"
+              alt="heart"
+              width="24px"
+          /></a>
+          <a class="notification-button"
+            ><img
+              src="assets/images//icons/notification.svg"
+              alt="notifications"
+              width="24px"
+          /></a>
+          <a href=""
+            ><img
+              class="settings-button"
+              src="assets/images//icons/setting.svg"
+              alt="settings"
+              width="24px"
+          /></a>
+          <a href=""
+            ><img
+              src="assets/images//icons/profile photo.png"
+              alt="Profile"
+              width="44px"
+          /></a>
+        </div>
+      </nav>
+    </header>
+    <div class="grid-container">
+      <main>
+        <form action="/">
+          <fieldset class="billing-info">
+            <header>
+              <legend>
+                Billing Info<small>Please enter your billing info</small>
+              </legend>
+              <span>Step 1 of 4</span>
+            </header>
+            <div class="input-grid">
+              <label>Name<input type="text" placeholder="Your name" autocomplete="name" required autofocus/></label>
+              <label
+                >Phone Number<input type="tel" placeholder="Phone Number" autocomplete="tel" required
+              /></label>
+              <label>Address<input type="text" placeholder="Address" autocomplete="street-address" required/></label>
+              <label
+                >Town/City<input type="text" placeholder="Town or city" required
+              /></label>
+            </div>
+          </fieldset>
+          <fieldset class="rental-info">
+            <header>
+              <legend>
+                Rental Info<small>Please select your rental date</small>
+              </legend>
+              <span>Step 2 of 4</span>
+            </header>
+            <label><input type="radio" />Pick - Up</label>
+            <div class="input-grid">
+              <div class="pickup-location-wrapper">
+                <label for="pickup-location">Location</label>
+                <div class="relative">
+                  <select name="pickup-location" id="pickup-location" required>
+                    <option value="">Select your city</option>
+                    <option value="location1">Location 1</option>
+                    <option value="location2">Location 2</option>
+                  </select>
+                  <div class="chevron-down"></div>
+                </div>
+              </div>
+              <div>
+                <label
+                  >Date
+                  <input
+                    type="text"
+                    name="date"
+                    placeholder="Select your date"
+                    onfocus="
+                      this.type = 'date';
+                      this.showPicker && this.showPicker();
+                    "
+                    onblur="if (!this.value) this.type = 'text';"
+                    required
+                  />
+                </label>
+              </div>
+              <div>
+                <label
+                  >Time
+                  <input
+                    type="text"
+                    name="time"
+                    placeholder="Select your time"
+                    onfocus="
+                      this.type = 'time';
+                      this.showPicker && this.showPicker();
+                    "
+                    onblur="if (!this.value) this.type = 'text';"
+                    required
+                  />
+                </label>
+              </div>
+            </div>
+            <label><input type="radio" checked/>Drop - Off</label>
+            <div class="input-grid">
+              <div class="pickup-location-wrapper">
+                <label for="pickup-location">Location</label>
+                <div class="relative">
+                  <select name="pickup-location" id="pickup-location" required>
+                    <option value="">Select your city</option>
+                    <option value="location1">Location 1</option>
+                    <option value="location2">Location 2</option>
+                  </select>
+                  <div class="chevron-down"></div>
+                </div>
+              </div>
+              <div>
+                <label
+                  >Date
+                  <input
+                    type="text"
+                    name="date"
+                    placeholder="Select your date"
+                    onfocus="
+                      this.type = 'date';
+                      this.showPicker && this.showPicker();
+                    "
+                    onblur="if (!this.value) this.type = 'text';"
+                    required
+                  />
+                </label>
+              </div>
+              <div>
+                <label
+                  >Time
+                  <input
+                    type="text"
+                    name="time"
+                    placeholder="Select your time"
+                    onfocus="
+                      this.type = 'time';
+                      this.showPicker && this.showPicker();
+                    "
+                    onblur="if (!this.value) this.type = 'text';"
+                    required
+                  />
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="payment-info">
+            <header>
+              <legend>
+                Payment Method<small>Please enter your payment method</small>
+              </legend>
+              <span>Step 3 of 4</span>
+            </header>
+            <div class="input-grid">
+              <div class="payment-method-wrapper">
+                <label
+                  ><input type="radio" name="payment-method" checked />Credit
+                  Card</label
+                >
+                <div class="credit-card-icons">
+                  <img src="assets/images//icons/visa.png" alt="Visa" height="24px" />
+                  <img
+                    src="assets/images//icons/mastercard.png"
+                    alt="Mastercard"
+                    height="24px"
+                  />
+                </div>
+              </div>
+              <label
+                >Card Number<input type="text" placeholder="Card number" autocomplete="cc-number" required maxlength="16" inputmode="numeric"
+              /></label>
+              <label
+                >Expiration Date<input type="text" placeholder="DD/MM/YY" inputmode="numeric" maxlength="8" autocomplete="cc-exp" required title="Enter date as DD/MM/YY"
+              /></label>
+              <label
+                >Card Holder<input type="text" placeholder="Card holder" autocomplete="cc-name" required minlength="2" maxlength="60"
+              /></label>
+              <label>CVC<input type="text" placeholder="CVC" autocomplete="cc-csc" required maxlength="5"/></label>
+            </div>
+
+            <div class="payment-method-wrapper">
+              <label><input type="radio" name="payment-method" />PayPal</label>
+              <div class="credit-card-icons">
+                <img src="assets/images//icons/paypal.png" alt="PayPal" height="24px" />
+              </div>
+            </div>
+
+            <div class="payment-method-wrapper">
+              <label><input type="radio" name="payment-method" />Bitcoin</label>
+              <div class="credit-card-icons">
+                <img
+                  src="assets/images//icons/bitcoin.png"
+                  alt="Bitcoin"
+                  height="24px"
+                />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="confirmation">
+            <header>
+              <legend>
+                Confirmation<small
+                  >We are getting to the end. Just few clicks and your rental is
+                  ready!</small
+                >
+              </legend>
+              <span>Step 4 of 4</span>
+            </header>
+            <div class="confirmation-wrapper">
+              <label
+                ><input type="checkbox" name="newsletter" />I agree with sending
+                an Marketing and newsletter emails. No spam, promissed!</label
+              >
+            </div>
+            <div class="confirmation-wrapper">
+              <label
+                ><input type="checkbox" name="newsletter" />I agree with our
+                terms and conditions and privacy policy.</label
+              >
+            </div>
+            <button>Rent Now</button>
+            <div class="safety-notice">
+              <img
+                src="assets/images//icons/ic-security-safety.png"
+                alt="Security safety icon"
+              />
+              <strong>All your data are safe</strong>
+              <p>
+                We are using the most advanced security to provide you the best
+                experience ever.
+              </p>
+            </div>
+          </fieldset>
+        </form>
+      </main>
+      <aside>
+        <div class="order-summary">
+          <legend>
+            Rental Summary<small
+              >Prices may change depending on the length of the rental and the
+              price of your rental car.</small
+            >
+          </legend>
+          <div class="product-wrapper">
+            <img
+              src="assets/images//detail-car/Nissan-GT-R-side-view.png"
+              alt="Nissan-GT-R-side-view"
+            />
+            <div class="product-info">
+              <h3>Nissan GT-R</h3>
+              <div class="stars-wrapper">
+                <div class="star"><div class="inner-star"></div></div>
+                <div class="star"><div class="inner-star"></div></div>
+                <div class="star"><div class="inner-star"></div></div>
+                <div class="star"><div class="inner-star"></div></div>
+                <div class="star"><div class="inner-star"></div></div>
+                <span>440+ Reviewer</span>
+              </div>
+            </div>
+          </div>
+          <div class="pricing">
+            <span><small>Subtotal</small>$80.00</span>
+            <span><small>Tax</small>$0.00</span>
+          </div>
+          <div class="promo-code">
+            <input type="text" placeholder="Apply promo code" />
+            <button>Apply now</button>
+          </div>
+          <div class="total">
+            <span
+              >Total Rental Price<small
+                >Overall price and includes rental discount</small
+              ></span
+            >
+            <span>$80.00</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <footer>
+      <div class="footer-inner-wrapper">
+        <div class="logo-wrapper">
+          <a href="">Morent</a>
+          <p>
+            Our vision is to provide convenience and help increase your sales
+            business.
+          </p>
+        </div>
+
+        <nav>
+          <div class="about">
+            <h2>About</h2>
+            <ul>
+              <li>
+                <a href="#">How it works</a>
+              </li>
+
+              <li>
+                <a href="#">Featured</a>
+              </li>
+              <li>
+                <a href="#">Partnership</a>
+              </li>
+              <li>
+                <a href="#">Bussiness Relation</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="community">
+            <h2>Community</h2>
+            <ul>
+              <li>
+                <a href="#">Events</a>
+              </li>
+
+              <li>
+                <a href="#">Blog</a>
+              </li>
+              <li>
+                <a href="#">Podcast</a>
+              </li>
+              <li>
+                <a href="#">Invite a friend</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="socials">
+            <h2>Socials</h2>
+            <ul>
+              <li>
+                <a href="#">Discord</a>
+              </li>
+
+              <li>
+                <a href="#">Instagram</a>
+              </li>
+              <li>
+                <a href="#">Twitter</a>
+              </li>
+              <li>
+                <a href="#">Facebook</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="copy">
+        <p>©2022 MORENT. All rights reserved</p>
+        <div>
+          <a href="#">Privacy & Policy</a>
+          <a href="#">Terms & Condition</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
