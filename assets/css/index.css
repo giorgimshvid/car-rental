@@ -143,7 +143,7 @@ ul {
   gap: 65px;
 }
 
-.navigation .logo-search-wrapper>a {
+.navigation .logo-search-wrapper > a {
   font-weight: 500;
   color: #3563e9;
   font-size: 32px;
@@ -158,13 +158,13 @@ ul {
   padding: 8px 58px;
 }
 
-.navigation .logo-search-wrapper form>img {
+.navigation .logo-search-wrapper form > img {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.navigation .logo-search-wrapper form>img:first-of-type {
+.navigation .logo-search-wrapper form > img:first-of-type {
   left: 20px;
 }
 
@@ -192,6 +192,16 @@ ul {
 
 .navigation .cta-wrapper :last-child {
   border-radius: 50%;
+}
+
+.navigation .cta-wrapper .cta-auth-btns {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  a {
+    width: 100px;
+    border: none;
+  }
 }
 
 .navigation .notification-button {
@@ -466,7 +476,7 @@ main {
   cursor: pointer;
 }
 
-.filter-container .pickup-dropoff .checkbox input[type=radio] {
+.filter-container .pickup-dropoff .checkbox input[type="radio"] {
   display: none;
 }
 
@@ -489,7 +499,11 @@ main {
   box-shadow: inset 0 0 0 5px #8dc7fd;
 }
 
-.filter-container .pickup-dropoff .checkbox input:checked+.custom-radio::before {
+.filter-container
+  .pickup-dropoff
+  .checkbox
+  input:checked
+  + .custom-radio::before {
   background-color: rgba(53, 99, 233, 0.3);
   box-shadow: inset 0 0 0 5px #3563e9;
 }
@@ -570,7 +584,6 @@ main {
   padding: 30px 26px;
   border-radius: 10px;
   max-width: 304px;
-
 }
 
 .car-categories .cars-wrapper .car-container header {
@@ -589,7 +602,6 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 70%;
-
 }
 
 .car-categories .cars-wrapper .car-container header h3 {
@@ -614,7 +626,7 @@ main {
   justify-content: center;
   align-items: center;
   margin-block: 30px;
-   
+
   width: 235px;
 }
 
@@ -692,7 +704,11 @@ main {
   stroke: #90a3bf;
 }
 
-.car-categories .cars-wrapper .car-container:nth-child(2) .price-container .discounted-price {
+.car-categories
+  .cars-wrapper
+  .car-container:nth-child(2)
+  .price-container
+  .discounted-price {
   position: absolute;
   margin-top: 50px;
   margin-left: 0px;
@@ -704,47 +720,99 @@ main {
   stroke: #90a3bf;
 }
 
-.car-categories .cars-wrapper .car-container:nth-child(4) .price-container .discounted-price {
+.car-categories
+  .cars-wrapper
+  .car-container:nth-child(4)
+  .price-container
+  .discounted-price {
   position: absolute;
   margin-top: 50px;
   margin-left: 0px;
   text-decoration: line-through;
 }
 
-.recomendation-car .cars-wrapper:nth-of-type(1) .car-container:nth-child(1) .price-container .discounted-price {
+.recomendation-car
+  .cars-wrapper:nth-of-type(1)
+  .car-container:nth-child(1)
+  .price-container
+  .discounted-price {
   position: absolute;
   margin-top: 50px;
   margin-left: 0px;
   text-decoration: line-through;
 }
 
-.recomendation-car .cars-wrapper:nth-of-type(1) .car-container:nth-child(2) header svg path,
-.recomendation-car .cars-wrapper:nth-of-type(1) .car-container:nth-child(4) header svg path {
+.recomendation-car
+  .cars-wrapper:nth-of-type(1)
+  .car-container:nth-child(2)
+  header
+  svg
+  path,
+.recomendation-car
+  .cars-wrapper:nth-of-type(1)
+  .car-container:nth-child(4)
+  header
+  svg
+  path {
   fill: #ed3f3f;
   stroke: #ed3f3f;
 }
 
-.recomendation-car .cars-wrapper:nth-of-type(1) .car-container:nth-child(1) header svg path,
-.recomendation-car .cars-wrapper:nth-of-type(1) .car-container:nth-child(3) header svg path {
+.recomendation-car
+  .cars-wrapper:nth-of-type(1)
+  .car-container:nth-child(1)
+  header
+  svg
+  path,
+.recomendation-car
+  .cars-wrapper:nth-of-type(1)
+  .car-container:nth-child(3)
+  header
+  svg
+  path {
   fill: transparent;
   stroke: #90a3bf;
 }
 
-.recomendation-car .cars-wrapper:nth-of-type(2) .car-container:nth-child(1) .price-container .discounted-price {
+.recomendation-car
+  .cars-wrapper:nth-of-type(2)
+  .car-container:nth-child(1)
+  .price-container
+  .discounted-price {
   position: absolute;
   margin-top: 50px;
   margin-left: 0px;
   text-decoration: line-through;
 }
 
-.recomendation-car .cars-wrapper:nth-of-type(2) .car-container:nth-child(1) header svg path,
-.recomendation-car .cars-wrapper:nth-of-type(2) .car-container:nth-child(3) header svg path {
+.recomendation-car
+  .cars-wrapper:nth-of-type(2)
+  .car-container:nth-child(1)
+  header
+  svg
+  path,
+.recomendation-car
+  .cars-wrapper:nth-of-type(2)
+  .car-container:nth-child(3)
+  header
+  svg
+  path {
   fill: #ed3f3f;
   stroke: #ed3f3f;
 }
 
-.recomendation-car .cars-wrapper:nth-of-type(2) .car-container:nth-child(2) header svg path,
-.recomendation-car .cars-wrapper:nth-of-type(2) .car-container:nth-child(4) header svg path {
+.recomendation-car
+  .cars-wrapper:nth-of-type(2)
+  .car-container:nth-child(2)
+  header
+  svg
+  path,
+.recomendation-car
+  .cars-wrapper:nth-of-type(2)
+  .car-container:nth-child(4)
+  header
+  svg
+  path {
   fill: transparent;
   stroke: #90a3bf;
 }
@@ -757,7 +825,7 @@ main {
   margin-bottom: 34px;
 }
 
-.button-div>div {
+.button-div > div {
   width: 760px;
   display: flex;
   justify-content: space-between;
@@ -804,7 +872,7 @@ body:has(.burger input:checked) aside {
   margin-bottom: 56px;
 }
 
-.grid-container aside form .filters>.title {
+.grid-container aside form .filters > .title {
   font-size: 12px;
   color: #90a3bf;
   margin-bottom: 28px;
@@ -883,24 +951,40 @@ section.car-details .photo-description-wrapper .photo-wrapper .preview p {
   font-weight: 500;
 }
 
-section.car-details .photo-description-wrapper .photo-wrapper .preview .main-img-wrapper {
+section.car-details
+  .photo-description-wrapper
+  .photo-wrapper
+  .preview
+  .main-img-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 32px;
 }
 
-section.car-details .photo-description-wrapper .photo-wrapper .thumbnails-wrapper {
+section.car-details
+  .photo-description-wrapper
+  .photo-wrapper
+  .thumbnails-wrapper {
   display: flex;
   gap: 24px;
 }
 
-section.car-details .photo-description-wrapper .photo-wrapper .thumbnails-wrapper .thumbnail-item {
+section.car-details
+  .photo-description-wrapper
+  .photo-wrapper
+  .thumbnails-wrapper
+  .thumbnail-item {
   width: 148px;
   height: 124px;
 }
 
-section.car-details .photo-description-wrapper .photo-wrapper .thumbnails-wrapper .thumbnail-item img {
+section.car-details
+  .photo-description-wrapper
+  .photo-wrapper
+  .thumbnails-wrapper
+  .thumbnail-item
+  img {
   width: 100%;
   height: 100%;
 }
@@ -911,47 +995,95 @@ section.car-details .photo-description-wrapper .description-wrapper {
   border-radius: 10px;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-header {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-header .title-rating-wrapper h1 {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-header
+  .title-rating-wrapper
+  h1 {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-header .title-rating-wrapper .rating-review {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-header
+  .title-rating-wrapper
+  .rating-review {
   display: flex;
   gap: 8px;
   padding-block: 2px;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-header .title-rating-wrapper .rating-review .stars-wrapper {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-header
+  .title-rating-wrapper
+  .rating-review
+  .stars-wrapper {
   display: flex;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-header .title-rating-wrapper .rating-review .stars-wrapper .star:last-of-type {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-header
+  .title-rating-wrapper
+  .rating-review
+  .stars-wrapper
+  .star:last-of-type {
   background-color: #90a3bf;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-header .title-rating-wrapper .rating-review .stars-wrapper .star:last-of-type .inner-star {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-header
+  .title-rating-wrapper
+  .rating-review
+  .stars-wrapper
+  .star:last-of-type
+  .inner-star {
   background-color: white;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-header .title-rating-wrapper .rating-review .review-quantity {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-header
+  .title-rating-wrapper
+  .rating-review
+  .review-quantity {
   display: flex;
   color: #596780;
   font-size: 14px;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-header .favorite-icon-wrapper {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-header
+  .favorite-icon-wrapper {
   align-self: start;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-body>p {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  > p {
   margin-block: 32px;
   line-height: 2;
   color: #596780;
@@ -960,7 +1092,11 @@ section.car-details .photo-description-wrapper .description-wrapper .description
   font-weight: 300;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 16px;
@@ -968,79 +1104,194 @@ section.car-details .photo-description-wrapper .description-wrapper .description
   column-gap: 44px;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .type,
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .steering,
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .capacity,
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .gasoline {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .type,
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .steering,
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .capacity,
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .gasoline {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .type .property,
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .steering .property,
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .capacity .property,
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .gasoline .property {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .type
+  .property,
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .steering
+  .property,
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .capacity
+  .property,
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .gasoline
+  .property {
   color: #90a3bf;
   line-height: 1.5;
   font-size: 20px;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .type .value,
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .steering .value,
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .capacity .value,
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .gasoline .value {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .type
+  .value,
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .steering
+  .value,
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .capacity
+  .value,
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .gasoline
+  .value {
   color: #596780;
   font-weight: 600;
   font-size: 20px;
   line-height: 1.5;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .type {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .type {
   order: 1;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .steering {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .steering {
   order: 3;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .capacity {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .capacity {
   order: 2;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper .gasoline {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-body
+  .specifications-grid-wrapper
+  .gasoline {
   order: 4;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-footer {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-footer {
   margin-top: 64px;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-footer .price-container {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-footer
+  .price-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-footer .price-container h4 {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-footer
+  .price-container
+  h4 {
   font-size: 28px;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-footer .price-container span {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-footer
+  .price-container
+  span {
   margin-left: 12px;
   margin-top: 5px;
   font-size: 16px;
   color: #90a3bf;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-footer .price-container .discounted-price {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-footer
+  .price-container
+  .discounted-price {
   margin-left: 0px;
   text-decoration: line-through;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-footer .price-container .rent-now-button {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-footer
+  .price-container
+  .rent-now-button {
   padding: 16px 32px;
   font-size: 16px;
   font-weight: 500;
@@ -1050,7 +1301,12 @@ section.car-details .photo-description-wrapper .description-wrapper .description
   background-color: #3563e9;
 }
 
-section.car-details .photo-description-wrapper .description-wrapper .description-footer .price-container .rent-now-button:hover {
+section.car-details
+  .photo-description-wrapper
+  .description-wrapper
+  .description-footer
+  .price-container
+  .rent-now-button:hover {
   background-color: rgb(23.0803571429, 71.3392857143, 211.9196428571);
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
@@ -1107,7 +1363,13 @@ section.car-details .reviews-container article .review-content header {
   margin-bottom: 12px;
 }
 
-section.car-details .reviews-container article .review-content header .name-position-wrapper h3 {
+section.car-details
+  .reviews-container
+  article
+  .review-content
+  header
+  .name-position-wrapper
+  h3 {
   font-size: 20px;
   font-weight: 600;
   color: #1a202c;
@@ -1116,20 +1378,47 @@ section.car-details .reviews-container article .review-content header .name-posi
   margin-bottom: 8px;
 }
 
-section.car-details .reviews-container article .review-content header .date-rating-wrapper p {
+section.car-details
+  .reviews-container
+  article
+  .review-content
+  header
+  .date-rating-wrapper
+  p {
   text-align: right;
   margin-bottom: 8px;
 }
 
-section.car-details .reviews-container article .review-content header .date-rating-wrapper .stars-wrapper {
+section.car-details
+  .reviews-container
+  article
+  .review-content
+  header
+  .date-rating-wrapper
+  .stars-wrapper {
   display: flex;
 }
 
-section.car-details .reviews-container article .review-content header .date-rating-wrapper .stars-wrapper .star:last-of-type {
+section.car-details
+  .reviews-container
+  article
+  .review-content
+  header
+  .date-rating-wrapper
+  .stars-wrapper
+  .star:last-of-type {
   background-color: #90a3bf;
 }
 
-section.car-details .reviews-container article .review-content header .date-rating-wrapper .stars-wrapper .star:last-of-type .inner-star {
+section.car-details
+  .reviews-container
+  article
+  .review-content
+  header
+  .date-rating-wrapper
+  .stars-wrapper
+  .star:last-of-type
+  .inner-star {
   background-color: white;
 }
 
@@ -1209,14 +1498,14 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   align-self: self-end;
 }
 
-.checkout-page .grid-container form fieldset>label {
+.checkout-page .grid-container form fieldset > label {
   margin-bottom: 24px;
   display: inline-block;
   font-weight: 600;
   letter-spacing: -2%;
 }
 
-.checkout-page .grid-container form fieldset>label input {
+.checkout-page .grid-container form fieldset > label input {
   margin-right: 8px;
 }
 
@@ -1253,7 +1542,13 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   height: 56px;
 }
 
-.checkout-page .grid-container form fieldset .input-grid label input::-moz-placeholder {
+.checkout-page
+  .grid-container
+  form
+  fieldset
+  .input-grid
+  label
+  input::-moz-placeholder {
   color: #90a3bf;
   line-height: 1.5;
   letter-spacing: -2%;
@@ -1261,7 +1556,13 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   font-size: 14px;
 }
 
-.checkout-page .grid-container form fieldset .input-grid label input::placeholder {
+.checkout-page
+  .grid-container
+  form
+  fieldset
+  .input-grid
+  label
+  input::placeholder {
   color: #90a3bf;
   line-height: 1.5;
   letter-spacing: -2%;
@@ -1274,13 +1575,24 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   padding: 13.5px 32px;
 }
 
-.checkout-page .grid-container form fieldset .input-grid .pickup-location-wrapper {
+.checkout-page
+  .grid-container
+  form
+  fieldset
+  .input-grid
+  .pickup-location-wrapper {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.checkout-page .grid-container form fieldset .input-grid .pickup-location-wrapper select {
+.checkout-page
+  .grid-container
+  form
+  fieldset
+  .input-grid
+  .pickup-location-wrapper
+  select {
   background-color: #ffffff;
   padding: 16px 32px;
   border-radius: 10px;
@@ -1296,12 +1608,24 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   appearance: none;
 }
 
-.checkout-page .grid-container form fieldset .input-grid .pickup-location-wrapper select:focus {
+.checkout-page
+  .grid-container
+  form
+  fieldset
+  .input-grid
+  .pickup-location-wrapper
+  select:focus {
   outline: solid 2px #3563e9;
   padding: 13.5px 32px;
 }
 
-.checkout-page .grid-container form fieldset .input-grid .pickup-location-wrapper .chevron-down {
+.checkout-page
+  .grid-container
+  form
+  fieldset
+  .input-grid
+  .pickup-location-wrapper
+  .chevron-down {
   position: absolute;
   right: 26px;
   top: 50%;
@@ -1319,7 +1643,11 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   border-radius: 10px;
 }
 
-.checkout-page .grid-container form fieldset .payment-method-wrapper:first-child {
+.checkout-page
+  .grid-container
+  form
+  fieldset
+  .payment-method-wrapper:first-child {
   padding: 0;
 }
 
@@ -1331,11 +1659,20 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   font-weight: bold;
 }
 
-.checkout-page .grid-container form fieldset .payment-method-wrapper:last-child {
+.checkout-page
+  .grid-container
+  form
+  fieldset
+  .payment-method-wrapper:last-child {
   margin-top: 24px;
 }
 
-.checkout-page .grid-container form fieldset .payment-method-wrapper .credit-card-icons {
+.checkout-page
+  .grid-container
+  form
+  fieldset
+  .payment-method-wrapper
+  .credit-card-icons {
   display: flex;
   gap: 12px;
 }
@@ -1351,7 +1688,11 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   border-radius: 10px;
 }
 
-.checkout-page .grid-container form fieldset .confirmation-wrapper:first-of-type {
+.checkout-page
+  .grid-container
+  form
+  fieldset
+  .confirmation-wrapper:first-of-type {
   margin-bottom: 24px;
 }
 
@@ -1424,7 +1765,13 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   border-bottom: 1px solid rgba(195, 212, 233, 0.6);
 }
 
-.checkout-page .grid-container aside .order-summary .product-wrapper .product-info h3 {
+.checkout-page
+  .grid-container
+  aside
+  .order-summary
+  .product-wrapper
+  .product-info
+  h3 {
   font-size: 32px;
   font-weight: 700;
   line-height: 1.5;
@@ -1433,19 +1780,47 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   margin-bottom: 8px;
 }
 
-.checkout-page .grid-container aside .order-summary .product-wrapper .product-info .stars-wrapper {
+.checkout-page
+  .grid-container
+  aside
+  .order-summary
+  .product-wrapper
+  .product-info
+  .stars-wrapper {
   display: flex;
 }
 
-.checkout-page .grid-container aside .order-summary .product-wrapper .product-info .stars-wrapper .star:last-of-type {
+.checkout-page
+  .grid-container
+  aside
+  .order-summary
+  .product-wrapper
+  .product-info
+  .stars-wrapper
+  .star:last-of-type {
   background-color: #90a3bf;
 }
 
-.checkout-page .grid-container aside .order-summary .product-wrapper .product-info .stars-wrapper .star:last-of-type .inner-star {
+.checkout-page
+  .grid-container
+  aside
+  .order-summary
+  .product-wrapper
+  .product-info
+  .stars-wrapper
+  .star:last-of-type
+  .inner-star {
   background-color: white;
 }
 
-.checkout-page .grid-container aside .order-summary .product-wrapper .product-info .stars-wrapper span {
+.checkout-page
+  .grid-container
+  aside
+  .order-summary
+  .product-wrapper
+  .product-info
+  .stars-wrapper
+  span {
   font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
@@ -1468,7 +1843,12 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   color: #1a202c;
 }
 
-.checkout-page .grid-container aside .order-summary .pricing span:not(:last-child) {
+.checkout-page
+  .grid-container
+  aside
+  .order-summary
+  .pricing
+  span:not(:last-child) {
   margin-bottom: 24px;
 }
 
@@ -1497,15 +1877,30 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   font-weight: 400;
 }
 
-.checkout-page .grid-container aside .order-summary .promo-code input::-moz-placeholder {
+.checkout-page
+  .grid-container
+  aside
+  .order-summary
+  .promo-code
+  input::-moz-placeholder {
   color: #90a3bf;
 }
 
-.checkout-page .grid-container aside .order-summary .promo-code input::placeholder {
+.checkout-page
+  .grid-container
+  aside
+  .order-summary
+  .promo-code
+  input::placeholder {
   color: #90a3bf;
 }
 
-.checkout-page .grid-container aside .order-summary .promo-code input:focus-visible {
+.checkout-page
+  .grid-container
+  aside
+  .order-summary
+  .promo-code
+  input:focus-visible {
   outline: none;
 }
 
@@ -1559,14 +1954,26 @@ section.car-details .reviews-container .show-all-wrapper .show-all {
   align-items: center;
   aspect-ratio: 1;
   background: #fbad39;
-  clip-path: polygon(50% 0, 79.3892626146% 90.4508497187%, 2.4471741852% 34.5491502813%, 97.5528258148% 34.5491502813%, 20.6107373854% 90.4508497187%);
+  clip-path: polygon(
+    50% 0,
+    79.3892626146% 90.4508497187%,
+    2.4471741852% 34.5491502813%,
+    97.5528258148% 34.5491502813%,
+    20.6107373854% 90.4508497187%
+  );
 }
 
 .star .inner-star {
   width: 15px;
   aspect-ratio: 1;
   background: #fbad39;
-  clip-path: polygon(50% 0, 79.3892626146% 90.4508497187%, 2.4471741852% 34.5491502813%, 97.5528258148% 34.5491502813%, 20.6107373854% 90.4508497187%);
+  clip-path: polygon(
+    50% 0,
+    79.3892626146% 90.4508497187%,
+    2.4471741852% 34.5491502813%,
+    97.5528258148% 34.5491502813%,
+    20.6107373854% 90.4508497187%
+  );
 }
 
 .heart-icon {
@@ -1772,7 +2179,11 @@ footer .copy div a {
     padding: 16px;
   }
 
-  .checkout-page .grid-container form fieldset .confirmation-wrapper:first-of-type {
+  .checkout-page
+    .grid-container
+    form
+    fieldset
+    .confirmation-wrapper:first-of-type {
     margin-bottom: 20px;
   }
 
@@ -1793,7 +2204,12 @@ footer .copy div a {
     margin-top: 20px;
   }
 
-  body.detail-page section.car-details .photo-wrapper .preview .main-img-wrapper img {
+  body.detail-page
+    section.car-details
+    .photo-wrapper
+    .preview
+    .main-img-wrapper
+    img {
     width: 100%;
   }
 
@@ -1802,7 +2218,11 @@ footer .copy div a {
     justify-content: space-between;
   }
 
-  body.detail-page section.car-details .photo-wrapper .thumbnails-wrapper .thumbnail-item {
+  body.detail-page
+    section.car-details
+    .photo-wrapper
+    .thumbnails-wrapper
+    .thumbnail-item {
     width: 120px;
     height: auto;
   }
@@ -1824,18 +2244,30 @@ footer .copy div a {
     align-items: center;
   }
 
-  body.detail-page section.car-details .photo-description-wrapper .photo-wrapper {
+  body.detail-page
+    section.car-details
+    .photo-description-wrapper
+    .photo-wrapper {
     background-color: #ffffff;
     padding: 16px;
     border-radius: 10px;
   }
 
-  body.detail-page section.car-details .photo-description-wrapper .photo-wrapper .preview {
+  body.detail-page
+    section.car-details
+    .photo-description-wrapper
+    .photo-wrapper
+    .preview {
     max-width: 600px;
     width: 100%;
   }
 
-  body.detail-page section.car-details .photo-description-wrapper .photo-wrapper .thumbnails-wrapper .thumbnail-item {
+  body.detail-page
+    section.car-details
+    .photo-description-wrapper
+    .photo-wrapper
+    .thumbnails-wrapper
+    .thumbnail-item {
     width: 148px;
   }
 }
@@ -2011,24 +2443,51 @@ footer .copy div a {
     padding-inline: 20px;
   }
 
-  body.detail-page section.car-details .photo-description-wrapper .description-wrapper {
+  body.detail-page
+    section.car-details
+    .photo-description-wrapper
+    .description-wrapper {
     padding: 16px;
   }
 
-  body.detail-page section.car-details .photo-description-wrapper .description-wrapper .description-body p {
+  body.detail-page
+    section.car-details
+    .photo-description-wrapper
+    .description-wrapper
+    .description-body
+    p {
     font-weight: 500;
     font-size: 17px;
     margin-block: 12px;
     line-height: 1.5;
   }
 
-  body.detail-page section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper {
+  body.detail-page
+    section.car-details
+    .photo-description-wrapper
+    .description-wrapper
+    .description-body
+    .specifications-grid-wrapper {
     -moz-column-gap: 70px;
     column-gap: 70px;
   }
 
-  body.detail-page section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper>div .property,
-  body.detail-page section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper>div .value {
+  body.detail-page
+    section.car-details
+    .photo-description-wrapper
+    .description-wrapper
+    .description-body
+    .specifications-grid-wrapper
+    > div
+    .property,
+  body.detail-page
+    section.car-details
+    .photo-description-wrapper
+    .description-wrapper
+    .description-body
+    .specifications-grid-wrapper
+    > div
+    .value {
     font-size: 17px;
   }
 }
@@ -2080,16 +2539,30 @@ footer .copy div a {
     gap: 20px;
   }
 
-  .recomendation-car .cars-wrapper .car-container .image-specs-wrapper .car-description {
+  .recomendation-car
+    .cars-wrapper
+    .car-container
+    .image-specs-wrapper
+    .car-description {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  body.detail-page section.car-details .photo-description-wrapper .photo-wrapper .thumbnails-wrapper .thumbnail-item {
+  body.detail-page
+    section.car-details
+    .photo-description-wrapper
+    .photo-wrapper
+    .thumbnails-wrapper
+    .thumbnail-item {
     width: auto;
   }
 
-  body.detail-page section.car-details .photo-description-wrapper .description-wrapper .description-body .specifications-grid-wrapper {
+  body.detail-page
+    section.car-details
+    .photo-description-wrapper
+    .description-wrapper
+    .description-body
+    .specifications-grid-wrapper {
     -moz-column-gap: 20px;
     column-gap: 20px;
   }
@@ -2132,7 +2605,13 @@ footer .copy div a {
   }
 
   .checkout-page .grid-container form fieldset .input-grid label input,
-  .checkout-page .grid-container form fieldset .input-grid .pickup-location-wrapper select {
+  .checkout-page
+    .grid-container
+    form
+    fieldset
+    .input-grid
+    .pickup-location-wrapper
+    select {
     padding: 12px 24px;
     height: 48px;
   }
@@ -2145,7 +2624,13 @@ footer .copy div a {
     width: 100px;
   }
 
-  .checkout-page .grid-container aside .order-summary .product-wrapper .product-info h3 {
+  .checkout-page
+    .grid-container
+    aside
+    .order-summary
+    .product-wrapper
+    .product-info
+    h3 {
     font-size: 24px;
   }
 
