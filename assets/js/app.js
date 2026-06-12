@@ -74,16 +74,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       maxEl.textContent = max;
 
       filters.prices = [min, max];
-      // priceRangeChangeDetect.checked = !priceRangeChangeDetect.checked;
-      priceRangeChangeDetect.value = min+max;
-      
-      setTimeout(() => {
-        const filteredCarsByPrice = carsArray.filter((car) => {
-          if (car.pricePerDay >= min && car.pricePerDay <= max) {
-            return car;
-          }
-        });
-      }, 2000);
+      applyFilters();
     });
 
     renderCars(
@@ -113,9 +104,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     renderCarCapacityFilter(uniqueCapacities, uniqueCapacitiesQuantity);
 
+    function applyFilters() {
+
+      const filteredCarsResult = carsArray.filter(car => {
+        const typeMatch = filters.types.length === 0 || filters.types.includes(car.type);
+        const capacityMatch = filters.capacities.length === 0 || filters.capacities.includes('' + car.seats);
+        const priceMatch = car.pricePerDay >= filters.prices[0] && car.pricePerDay <= filters.prices[1];
+        return typeMatch && capacityMatch && priceMatch;
+      });
+
+      renderCars(
+        document.querySelector(".car-categories .cars-wrapper"),
+        filteredCarsResult,
+      );
+    }
+
     filtersWrapper.addEventListener("change", (e) => {
       const selectedFilter = e.target.name;
       const targetType = e.target.dataset.type;
+
+      if (!targetType) return;
 
       if (!e.target.checked) {
         filters[targetType] = filters[targetType].filter(
@@ -125,18 +133,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         filters[targetType].push(selectedFilter);
       }
 
-      const filteredCarsResult = carsArray.filter(car => {
-        return (
-          filters.types.includes(car.type) ||
-          filters.capacities.includes('' + car.seats) ||
-          (car.pricePerDay >= filters.prices[0] && car.pricePerDay <= filters.prices[1])
-        );
-      });  
-
-      renderCars(
-        document.querySelector(".car-categories .cars-wrapper"),
-        filteredCarsResult,
-      );
+      applyFilters();
     });
 
     clearFilterBtn.addEventListener('click', (e) => {
