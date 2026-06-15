@@ -1,5 +1,13 @@
 import { fetchData } from "./api.js";
 import { saveDataToLocalStorage, getDataFromLocalStorage } from "./storage.js";
+
+const bcrypt = window.dcodeIO.bcrypt;
+
+import {
+  validateName,
+  validatePassword,
+  validateEmail,
+} from "./validations.js";
 import {
   renderCars,
   renderCarTypesFilter,
@@ -172,14 +180,47 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const role = authForm.querySelector("#role");
 
-    authForm.addEventListener("submit", (e) => {
+    authForm.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      const firstNameValidation = validateName(firstName.value.trim());
+      if (!firstNameValidation) {
+        console.log("error validating firstname");
+        return;
+      }
+
+      const lastNameValidation = validateName(lastName.value.trim());
+      if (!lastNameValidation) {
+        console.log("erorr validating lastname");
+        return;
+      }
+
+      const emailValidation = validateEmail(email.value.trim());
+      if (!emailValidation) {
+        console.log("error validating email");
+        return;
+      }
+
+      const passwordValidation = validatePassword(password.value);
+      if (!passwordValidation) {
+        console.log("error validating password");
+        return;
+      }
+
+      if (role.value !== "user" && role.value !== "admin") {
+        console.log("error validating Role");
+        return;
+      }
+      const hashedPassword = await hashPassword(password.value);
+      
+
+
 
       const newUser = new User(
         firstName.value,
         lastName.value,
         email.value,
-        password.value,
+        hashedPassword,
         role.value,
       );
 
@@ -213,3 +254,24 @@ searchInput?.addEventListener("input", async (e) => {
     );
   }
 });
+
+
+
+
+
+async function hashPassword(password) {
+  const saltRounds = 5;
+
+  try {
+    const hash = await bcrypt.hash(password, saltRounds);
+    console.log(hash);
+    return hash;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+
+
+
+
