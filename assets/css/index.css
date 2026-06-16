@@ -104,6 +104,32 @@ input {
   border: 0;
 }
 
+.form__toggle-password {
+    position: absolute;
+    right: 0.5rem;
+    color: #64748b;
+    border-radius: 6px; 
+    padding: 0.25rem;
+    transition: 0.2s ease-in-out;
+     border: none;
+}
+
+.form__toggle-password:hover {
+    color: #6366f1;
+    background-color: #eef2ff;
+}
+
+.form__toggle-icon {
+    pointer-events: none;
+    font-size:  1.125rem;
+    
+}
+.form__input-wrapper {
+      position: relative;
+    display: flex;
+    align-items: center;
+}
+
 button {
   cursor: pointer;
 }
@@ -111,6 +137,8 @@ button {
 ul {
   list-style: none;
 }
+
+
 
 .navigation {
   display: flex;

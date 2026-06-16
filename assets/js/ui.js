@@ -91,3 +91,12 @@ export function renderCarCapacityFilter(carCapacity, carCapacityQuantity) {
     capacityWrapper.insertAdjacentHTML("beforeend", capacityContainer);
   });
 }
+export function togglePasswordVisibility(wrapper) {
+  const buttonText = wrapper.querySelector(".form__toggle-icon");
+  const passwordElement = wrapper.querySelector(".form__input-password");
+  passwordElement.setAttribute(
+    "type",
+    passwordElement.getAttribute("type") === "password" ? "text" : "password",
+  );
+  buttonText.textContent = buttonText.textContent === "Show" ? "Hide" : "Show";
+}

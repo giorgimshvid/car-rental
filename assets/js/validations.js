@@ -14,4 +14,15 @@ function validateName(name) {
   return namePattern.test(name);
 }
 
-export { validateName, validatePassword, validateEmail };
+function validatePasswordMatch(password, retypePassword) {
+  return password === retypePassword;
+}
+
+ 
+
+export {
+  validateName,
+  validatePassword,
+  validateEmail,
+  validatePasswordMatch,
+ };

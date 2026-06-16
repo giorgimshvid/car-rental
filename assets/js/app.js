@@ -1,17 +1,24 @@
-import { fetchData } from "./api.js";
-import { saveDataToLocalStorage, getDataFromLocalStorage } from "./storage.js";
-
 const bcrypt = window.dcodeIO.bcrypt;
+import { fetchData } from "./api.js";
+import { saveDataToLocalStorage,
+   getDataFromLocalStorage,
+  getDataFromSessionStorage,
+  saveDataToSessionStorage,
+  createUsers } from "./storage.js";
+
 
 import {
   validateName,
   validatePassword,
   validateEmail,
+  validatePasswordMatch,
+   
 } from "./validations.js";
 import {
   renderCars,
   renderCarTypesFilter,
   renderCarCapacityFilter,
+  togglePasswordVisibility
 } from "./ui.js";
 import { User } from "./User.js";
 
@@ -43,14 +50,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (pathName.includes("index")) {
     renderCars(document.querySelector(".popular-car .cars-wrapper"), carsArray);
+    const Users=await createUsers(hashPassword,User)
+     localStorage.setItem('users',JSON.stringify(Users))
   } else if (pathName.includes("filter")) {
     const slider = document.getElementById("slider");
 
     const filtersWrapper = document.querySelector("aside form");
     const clearFilterBtn = filtersWrapper.querySelector("#clearFilters");
-    const priceRangeChangeDetect = filtersWrapper.querySelector(
-      "#priceRangeChangeDetect",
-    );
+  
 
     const priceRange = carsArray.reduce(
       (acc, car) => {
@@ -180,6 +187,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const role = authForm.querySelector("#role");
 
+    const togglePasswordBtns = authForm.querySelectorAll(
+      ".form__toggle-password",
+    );
+
+    togglePasswordBtns.forEach((btn) => {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        togglePasswordVisibility(btn.closest(".form__input-wrapper"));
+      });
+    });
+
     authForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
@@ -207,14 +225,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
 
+      const retypePasswordValidation = validatePasswordMatch(
+        password.value,
+        repeatPassword.value,
+      );
+      if (!retypePasswordValidation) {
+        console.log("error validating password match");
+        return;
+      }
+
       if (role.value !== "user" && role.value !== "admin") {
         console.log("error validating Role");
         return;
       }
       const hashedPassword = await hashPassword(password.value);
-      
-
-
 
       const newUser = new User(
         firstName.value,
@@ -225,7 +249,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
 
       console.log(newUser, newUser.getFullName(), newUser.isAdmin());
-    });
+      saveDataToSessionStorage('user',newUser)
+      authForm.reset() 
+     });
   } else if (pathName.includes("sign-in")) {
   }
 });
@@ -255,10 +281,6 @@ searchInput?.addEventListener("input", async (e) => {
   }
 });
 
-
-
-
-
 async function hashPassword(password) {
   const saltRounds = 5;
 
@@ -271,7 +293,4 @@ async function hashPassword(password) {
   }
 }
 
-
-
-
-
+ 
