@@ -18,11 +18,14 @@ function validatePasswordMatch(password, retypePassword) {
   return password === retypePassword;
 }
 
- 
+function checkExistingUser(email, users) {
+  return users.some((user) => user.email === email);
+}
 
 export {
   validateName,
   validatePassword,
   validateEmail,
   validatePasswordMatch,
- };
+  checkExistingUser,
+};

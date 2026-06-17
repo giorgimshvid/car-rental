@@ -1,24 +1,25 @@
 const bcrypt = window.dcodeIO.bcrypt;
 import { fetchData } from "./api.js";
-import { saveDataToLocalStorage,
-   getDataFromLocalStorage,
+import {
+  saveDataToLocalStorage,
+  getDataFromLocalStorage,
   getDataFromSessionStorage,
   saveDataToSessionStorage,
-  createUsers } from "./storage.js";
-
+  createUsers,
+} from "./storage.js";
 
 import {
   validateName,
   validatePassword,
   validateEmail,
   validatePasswordMatch,
-   
+  checkExistingUser,
 } from "./validations.js";
 import {
   renderCars,
   renderCarTypesFilter,
   renderCarCapacityFilter,
-  togglePasswordVisibility
+  togglePasswordVisibility,
 } from "./ui.js";
 import { User } from "./User.js";
 
@@ -50,14 +51,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (pathName.includes("index")) {
     renderCars(document.querySelector(".popular-car .cars-wrapper"), carsArray);
-    const Users=await createUsers(hashPassword,User)
-     localStorage.setItem('users',JSON.stringify(Users))
+    const dummyUsersData = await createUsers(hashPassword, User);
+
+    const usersFromLocalStorage = await getDataFromLocalStorage("users");
+
+    if (!usersFromLocalStorage) {
+      saveDataToLocalStorage("users", dummyUsersData);
+    }
   } else if (pathName.includes("filter")) {
     const slider = document.getElementById("slider");
 
     const filtersWrapper = document.querySelector("aside form");
     const clearFilterBtn = filtersWrapper.querySelector("#clearFilters");
-  
 
     const priceRange = carsArray.reduce(
       (acc, car) => {
@@ -219,6 +224,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
 
+      const userExists = checkExistingUser(
+        email.value.trim(),
+        (await getDataFromLocalStorage("users")) || [],
+      );
+      if (userExists) {
+        console.log("User with this email already exists");
+        return;
+      }
+
       const passwordValidation = validatePassword(password.value);
       if (!passwordValidation) {
         console.log("error validating password");
@@ -248,11 +262,70 @@ document.addEventListener("DOMContentLoaded", async () => {
         role.value,
       );
 
+      const usersFromLocalStorage = await getDataFromLocalStorage("users");
+      saveDataToLocalStorage("users", [...usersFromLocalStorage, newUser]);
+
       console.log(newUser, newUser.getFullName(), newUser.isAdmin());
-      saveDataToSessionStorage('user',newUser)
-      authForm.reset() 
-     });
+      saveDataToSessionStorage("user", newUser);
+      authForm.reset();
+    });
   } else if (pathName.includes("sign-in")) {
+    const authForm = document.querySelector(".auth-wrapper form");
+
+    const togglePasswordBtn = authForm.querySelector(".form__toggle-password");
+
+    const email = authForm.querySelector("#email");
+
+    const password = authForm.querySelector("#password");
+
+    togglePasswordBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      togglePasswordVisibility(
+        togglePasswordBtn.closest(".form__input-wrapper"),
+      );
+    });
+
+    const usersDataFromLocalStorage = await getDataFromLocalStorage("users");
+
+    authForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const emailValidation = validateEmail(email.value.trim());
+      if (!emailValidation) {
+        console.log("error validating email");
+        return;
+      }
+
+      const passwordValidation = validatePassword(password.value);
+      if (!passwordValidation) {
+        console.log("error validating password");
+        return;
+      }
+
+      const existingUser = usersDataFromLocalStorage.find(
+        (user) => user.email === email.value.trim(),
+      );
+
+      if (!existingUser) {
+        console.log("No user registered with such email");
+        return;
+      }
+
+      const passwordMatch = await bcrypt.compare(
+        password.value,
+        existingUser.password,
+      );
+
+      if (!passwordMatch) {
+        console.log("Incorrect password");
+        return;
+      }
+
+      saveDataToSessionStorage("user", existingUser);
+
+      console.log("Login successful", existingUser);
+      authForm.reset();
+    });
   }
 });
 
@@ -292,5 +365,3 @@ async function hashPassword(password) {
     console.error(err);
   }
 }
-
- 

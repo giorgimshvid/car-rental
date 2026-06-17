@@ -24,7 +24,7 @@
         background: #fff;
         padding: 2.5rem;
         border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         width: 100%;
         max-width: 450px;
         box-sizing: border-box;
@@ -32,7 +32,7 @@
       .auth-container h2 {
         text-align: center;
         margin-bottom: 1.5rem;
-        color: #1A202C;
+        color: #1a202c;
         font-size: 1.5rem;
         font-weight: 700;
       }
@@ -43,13 +43,13 @@
         display: block;
         margin-bottom: 0.5rem;
         font-weight: 600;
-        color: #1A202C;
+        color: #1a202c;
         font-size: 0.9rem;
       }
       .form-group input {
         width: 100%;
         padding: 0.8rem;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #e2e8f0;
         border-radius: 5px;
         outline: none;
         font-family: inherit;
@@ -57,12 +57,12 @@
         box-sizing: border-box;
       }
       .form-group input:focus {
-        border-color: #3563E9;
+        border-color: #3563e9;
       }
       .auth-btn {
         width: 100%;
         padding: 0.8rem;
-        background: #3563E9;
+        background: #3563e9;
         color: white;
         border: none;
         border-radius: 5px;
@@ -79,10 +79,10 @@
         text-align: center;
         margin-top: 1.5rem;
         font-size: 0.9rem;
-        color: #90A3BF;
+        color: #90a3bf;
       }
       .auth-link a {
-        color: #3563E9;
+        color: #3563e9;
         text-decoration: none;
         font-weight: 600;
       }
@@ -112,11 +112,29 @@
         <form action="">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email address"
+              required
+            />
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required />
+            <div class="form__input-wrapper">
+              <input
+                class="form__input-password"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+              />
+              <button class="form__toggle-password" data-target="loginPassword">
+                <span class="form__toggle-icon">Show</span>
+              </button>
+            </div>
           </div>
           <button type="submit" class="auth-btn">Sign In</button>
         </form>
@@ -125,5 +143,7 @@
         </div>
       </div>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+    <script type="module" src="./assets/js/app.js"></script>
   </body>
 </html>
