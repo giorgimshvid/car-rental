@@ -105,29 +105,28 @@ input {
 }
 
 .form__toggle-password {
-    position: absolute;
-    right: 0.5rem;
-    color: #64748b;
-    border-radius: 6px; 
-    padding: 0.25rem;
-    transition: 0.2s ease-in-out;
-     border: none;
+  position: absolute;
+  right: 0.5rem;
+  color: #64748b;
+  border-radius: 6px;
+  padding: 0.25rem;
+  transition: 0.2s ease-in-out;
+  border: none;
 }
 
 .form__toggle-password:hover {
-    color: #6366f1;
-    background-color: #eef2ff;
+  color: #6366f1;
+  background-color: #eef2ff;
 }
 
 .form__toggle-icon {
-    pointer-events: none;
-    font-size:  1.125rem;
-    
+  pointer-events: none;
+  font-size: 1.125rem;
 }
 .form__input-wrapper {
-      position: relative;
-    display: flex;
-    align-items: center;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 button {
@@ -137,8 +136,6 @@ button {
 ul {
   list-style: none;
 }
-
-
 
 .navigation {
   display: flex;
@@ -230,6 +227,30 @@ ul {
     width: 100px;
     border: none;
   }
+  .logout-btn {
+    background-color: #3563e9;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+  }
+}
+
+.navigation .cta-wrapper .cta-btns {
+  display: flex;
+  gap: 20px;
+}
+
+.navigation .cta-wrapper .cta-btns .profile-image {
+  width: 44px;
+  height: 44px;
+}
+
+.navigation .cta-wrapper .cta-btns .profile-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .navigation .notification-button {

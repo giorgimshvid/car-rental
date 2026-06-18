@@ -100,3 +100,61 @@ export function togglePasswordVisibility(wrapper) {
   );
   buttonText.textContent = buttonText.textContent === "Show" ? "Hide" : "Show";
 }
+
+export function renderHeaderCta(wrapper, user) {
+  const ctaContent = `
+    ${
+      user
+        ? `
+      <div class="cta-btns">
+        <a href="">
+          <img
+            class="heart-button"
+            src="assets/images/icons/heart.svg"
+            alt="heart"
+            width="24px"
+          />
+        </a>
+        <a class="notification-button">
+          <img
+            src="assets/images/icons/notification.svg"
+            alt="notifications"
+            width="24px"
+          />
+        </a>
+        <a href="">
+          <img
+            class="settings-button"
+            src="assets/images/icons/setting.svg"
+            alt="settings"
+            width="24px"
+          />
+        </a>
+        <div class="profile-image">
+          <img
+            src="${user.profilePhotoUrl}"
+            alt="Profile"
+            width="44px"
+          />
+        </div>
+      </div>
+    `
+        : ""
+    }
+    ${
+      user
+        ? `
+      <div class="cta-auth-btns">
+        <button class="logout-btn">Log out</button>
+      </div>
+    `
+        : `
+      <div class="cta-auth-btns">
+        <a href="sign-up.html">Sign up</a>
+        <a href="sign-in.html">Sign in</a>
+      </div>
+    `
+    }`;
+
+  wrapper.innerHTML = ctaContent;
+}

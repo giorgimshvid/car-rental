@@ -6,6 +6,7 @@ import {
   getDataFromSessionStorage,
   saveDataToSessionStorage,
   createUsers,
+  removeFromSessionStorage,
 } from "./storage.js";
 
 import {
@@ -20,6 +21,7 @@ import {
   renderCarTypesFilter,
   renderCarCapacityFilter,
   togglePasswordVisibility,
+  renderHeaderCta,
 } from "./ui.js";
 import { User } from "./User.js";
 
@@ -58,6 +60,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!usersFromLocalStorage) {
       saveDataToLocalStorage("users", dummyUsersData);
     }
+
+    const userFromSessionStorage = await getDataFromSessionStorage("user");
+    const ctaWrapper = document.querySelector(".navigation .cta-wrapper");
+
+    renderHeaderCta(ctaWrapper, userFromSessionStorage);
+
+    const logoutBtn = document.querySelector(".logout-btn");
+
+    logoutBtn?.addEventListener("click", () => {
+      console.log("Logging out...");
+      removeFromSessionStorage("user");
+    });
   } else if (pathName.includes("filter")) {
     const slider = document.getElementById("slider");
 
@@ -325,6 +339,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       console.log("Login successful", existingUser);
       authForm.reset();
+
+      if (existingUser.role === "admin") {
+        window.location.href = "dashboard.html";
+      } else {
+        window.location.href = "index.html";
+      }
     });
   }
 });
