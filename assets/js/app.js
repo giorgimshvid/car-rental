@@ -24,6 +24,7 @@ import {
   renderHeaderCta,
 } from "./ui.js";
 import { User } from "./User.js";
+import { AuthService } from "./AuthService.js";
 
 const CARS_API =
   "https://raw.githubusercontent.com/Gkhundadze/car-rental-car-data/refs/heads/main/carData.json?v=3";
@@ -51,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     saveDataToLocalStorage("cars", cars);
   }
 
-  if (pathName.includes("index")) {
+  if (pathName.includes("index") || pathName === "/") {
     renderCars(document.querySelector(".popular-car .cars-wrapper"), carsArray);
     const dummyUsersData = await createUsers(hashPassword, User);
 
@@ -70,7 +71,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     logoutBtn?.addEventListener("click", () => {
       console.log("Logging out...");
-      removeFromSessionStorage("user");
+      AuthService.logout();
+      renderHeaderCta(ctaWrapper, null);
     });
   } else if (pathName.includes("filter")) {
     const slider = document.getElementById("slider");
@@ -335,7 +337,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
 
-      saveDataToSessionStorage("user", existingUser);
+      AuthService.login(existingUser);
 
       console.log("Login successful", existingUser);
       authForm.reset();
@@ -345,6 +347,84 @@ document.addEventListener("DOMContentLoaded", async () => {
       } else {
         window.location.href = "index.html";
       }
+    });
+  } else if (pathName.includes("dashboard")) {
+    const url =
+      "https://raw.githubusercontent.com/Gkhundadze/car-rental-car-data/refs/heads/main/carData.json";
+    const transactionsContainer = document.getElementById(
+      "recent-transactions",
+    );
+
+    console.log("TEST1");
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      // Take first 4 items
+      const recentCars = data.slice(0, 4);
+
+      transactionsContainer.innerHTML = "";
+
+      // Mock dates based on image to look similar
+      const mockDates = ["20 July", "19 July", "18 July", "17 July"];
+
+      recentCars.forEach((car, index) => {
+        const dateStr = mockDates[index] || "16 July";
+        const typeStr = car.type.charAt(0).toUpperCase() + car.type.slice(1);
+
+        const html = `
+            <div class="transaction-item">
+              <div class="tx-car">
+                <img src="${car.image}" alt="${car.model}" class="tx-img" onerror="this.src='https://placehold.co/132x70?text=Car'">
+                <div class="tx-details">
+                  <h4>${car.brand} ${car.model}</h4>
+                  <p>${typeStr} Car</p>
+                </div>
+              </div>
+              <div class="tx-price-date">
+                <p>${dateStr}</p>
+                <h4>$${car.pricePerDay.toFixed(2)}</h4>
+              </div>
+            </div>
+          `;
+        transactionsContainer.insertAdjacentHTML("beforeend", html);
+      });
+    } catch (error) {
+      transactionsContainer.innerHTML =
+        '<div style="color: red;">Error loading data.</div>';
+      console.error("Error fetching car data:", error);
+    }
+
+    // Sidebar Toggle
+    const hamburgerBtn = document.getElementById("hamburger-btn");
+    const sidebar = document.querySelector(".sidebar");
+    if (hamburgerBtn && sidebar) {
+      hamburgerBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle("open");
+      });
+
+      document.addEventListener("click", (e) => {
+        if (
+          window.innerWidth <= 992 &&
+          !sidebar.contains(e.target) &&
+          !hamburgerBtn.contains(e.target)
+        ) {
+          sidebar.classList.remove("open");
+        }
+      });
+    }
+
+    // Logout
+    const logoutBtn = document.querySelector("aside.sidebar .logout");
+
+    const ctaWrapper = document.querySelector(".navigation .cta-wrapper");
+console.log(ctaWrapper)
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      AuthService.logout();
+      renderHeaderCta(ctaWrapper, null);
     });
   }
 });

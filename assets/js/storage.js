@@ -54,7 +54,7 @@ export async function getDataFromSessionStorage(key) {
     }
     return JSON.parse(data);
   } catch (error) {
-    console.error(error.message);
+    console.warn(error.message);
   }
 }
 
