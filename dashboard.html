@@ -11,6 +11,89 @@
       rel="stylesheet"
     />
     <style>
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes bell-shake {
+        0% {
+          transform: rotate(0);
+        }
+
+        10% {
+          transform: rotate(18deg);
+        }
+
+        20% {
+          transform: rotate(-18deg);
+        }
+
+        30% {
+          transform: rotate(14deg);
+        }
+
+        40% {
+          transform: rotate(-14deg);
+        }
+
+        50% {
+          transform: rotate(10deg);
+        }
+
+        60% {
+          transform: rotate(-10deg);
+        }
+
+        70% {
+          transform: rotate(6deg);
+        }
+
+        80% {
+          transform: rotate(-6deg);
+        }
+
+        90% {
+          transform: rotate(3deg);
+        }
+
+        100% {
+          transform: rotate(0);
+        }
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+          color: #999;
+        }
+
+        25% {
+          transform: scale(1.2);
+          color: #ff3b3b;
+        }
+
+        40% {
+          transform: scale(1);
+          color: #ff0000;
+        }
+
+        60% {
+          transform: scale(1.2);
+          color: #ff3b3b;
+        }
+
+        100% {
+          transform: scale(1);
+          color: #999;
+        }
+      }
+
       :root {
         --primary: #3563e9;
         --secondary: #54a6ff;
@@ -35,6 +118,14 @@
         background-color: var(--background);
         color: var(--text-dark);
         display: flex;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      a {
+        text-decoration: none;
       }
 
       ::-webkit-scrollbar {
@@ -71,6 +162,14 @@
         color: var(--primary);
         margin-bottom: 40px;
         letter-spacing: -0.03em;
+
+        a {
+          font-weight: 500;
+          color: #3563e9;
+          font-size: 32px;
+          text-transform: uppercase;
+          padding-left: 32px;
+        }
       }
 
       .nav-group {
@@ -166,11 +265,6 @@
         box-shadow: 0 2px 4px rgba(53, 99, 233, 0.2);
       }
 
-      .logout {
-        margin-top: auto;
-        margin-bottom: 20px;
-      }
-
       /* MAIN CONTENT */
       .main-wrapper {
         margin-left: var(--sidebar-width);
@@ -211,43 +305,84 @@
         margin: 0 12px;
       }
 
-      .header-actions {
+      header.header .cta-wrapper {
         display: flex;
-        align-items: center;
         gap: 20px;
       }
 
-      .icon-btn {
-        width: 44px;
+      header.header .cta-wrapper a:not(:last-child) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgba(195, 212, 233, 0.4);
         height: 44px;
+        width: 44px;
         border-radius: 50%;
-        border: 1px solid var(--border);
-        background: var(--white);
+      }
+
+      header.header .cta-wrapper :last-child {
+        border-radius: 50%;
+      }
+
+      header.header .cta-wrapper .cta-auth-btns {
         display: flex;
         align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        position: relative;
-        color: #596780;
+        gap: 40px;
+        a {
+          width: 100px;
+          border: none;
+        }
+        .logout-btn {
+          background-color: #3563e9;
+          color: #ffffff;
+          padding: 10px 20px;
+          font-size: 16px;
+          border: none;
+          border-radius: 15px;
+        }
       }
 
-      .icon-btn.has-notification::after {
-        content: "";
-        position: absolute;
-        top: 10px;
-        right: 12px;
-        width: 10px;
-        height: 10px;
-        background-color: #ff4423;
-        border-radius: 50%;
+      header.header .cta-wrapper .cta-btns {
+        display: flex;
+        gap: 20px;
       }
 
-      .profile-pic {
+      header.header .cta-wrapper .cta-btns .profile-image {
         width: 44px;
         height: 44px;
-        border-radius: 50%;
+      }
+
+      header.header .cta-wrapper .cta-btns .profile-image img {
         object-fit: cover;
-        cursor: pointer;
+        width: 100%;
+        height: 100%;
+      }
+
+      header.header .notification-button {
+        position: relative;
+      }
+
+      header.header .notification-button::after {
+        content: "";
+        width: 11px;
+        height: 11px;
+        top: 2px;
+        right: 2px;
+        background-color: #ff4423;
+        border-radius: 50%;
+        position: absolute;
+      }
+
+      header.header .settings-button:hover {
+        animation: rotate 1s linear;
+      }
+
+      header.header .notification-button:hover {
+        animation: bell-shake 0.8s ease-in-out;
+      }
+
+      header.header .heart-button:hover {
+        animation: heartbeat 0.8s ease-in-out;
       }
 
       /* DASHBOARD CONTENT */
@@ -674,13 +809,13 @@
   <body>
     <!-- SIDEBAR -->
     <aside class="sidebar">
-      <div class="logo">MORENT</div>
+      <div class="logo"><a href="/index.html">MORENT</a></div>
 
       <div class="nav-group">
         <span class="nav-label">Main Menu</span>
-        <ul class="nav-list">
+        <ul class="nav-list" id="main-menu-nav">
           <li>
-            <a href="#" class="nav-item active">
+            <a href="#" class="nav-item active" data-tab="dashboard">
               <svg viewBox="0 0 24 24">
                 <path
                   d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
@@ -690,37 +825,7 @@
             </a>
           </li>
           <li>
-            <a href="#" class="nav-item">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"
-                />
-              </svg>
-              Car Rent
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-item">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
-                />
-              </svg>
-              Insight
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-item">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M21 7h-3V6c0-1.65-1.35-3-3-3h-6C7.35 3 6 4.35 6 6v1H3c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM8 6c0-.55.45-1 1-1h6c.55 0 1 .45 1 1v1H8V6zm11 12H5V9h14v9z"
-                />
-              </svg>
-              Reimburse
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-tab="inbox">
               <svg viewBox="0 0 24 24">
                 <path
                   d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
@@ -730,13 +835,23 @@
             </a>
           </li>
           <li>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-tab="users">
               <svg viewBox="0 0 24 24">
                 <path
-                  d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
                 />
               </svg>
-              Calender
+              Users
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item" data-tab="products">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2v12c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"
+                />
+              </svg>
+              Products
             </a>
           </li>
         </ul>
@@ -809,15 +924,6 @@
           </li>
         </ul>
       </div>
-
-      <button class="nav-item logout">
-        <svg viewBox="0 0 24 24">
-          <path
-            d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"
-          />
-        </svg>
-        Log Out
-      </button>
     </aside>
 
     <!-- MAIN WRAPPER -->
@@ -865,38 +971,7 @@
           </svg>
         </div>
 
-        <div class="header-actions">
-          <div class="icon-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-              />
-            </svg>
-          </div>
-          <div class="icon-btn has-notification">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"
-              />
-            </svg>
-          </div>
-          <div class="icon-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.73,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.49-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"
-              />
-            </svg>
-          </div>
-          <img
-            src="assets/images/icons/profile photo.png"
-            alt="Profile"
-            class="profile-pic"
-            onerror="
-              this.src =
-                'https://ui-avatars.com/api/?name=User&background=3563E9&color=fff'
-            "
-          />
-        </div>
+        <div class="cta-wrapper"></div>
       </header>
 
       <!-- CONTENT GRID -->
@@ -1172,5 +1247,120 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
     <script type="module" src="./assets/js/app.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const dashboardContent = document.querySelector(".dashboard-content");
+        let originalDashboardHTML = "";
+
+        const templates = {
+          inbox: `
+            <div class="card" style="grid-column: 1 / -1; min-height: 400px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="var(--text-light)" style="margin-bottom: 16px;">
+                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              <h2 style="font-size: 24px; color: var(--text-dark); margin-bottom: 8px;">Your Inbox is Empty</h2>
+              <p style="color: var(--text-light);">You don't have any new messages at the moment.</p>
+            </div>
+          `,
+          users: `
+            <div class="card" style="grid-column: 1 / -1; min-height: 400px;">
+              <div class="card-title" style="margin-bottom: 24px;">Manage Users</div>
+              <div style="overflow-x: auto;">
+                <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                  <thead>
+                    <tr style="border-bottom: 1px solid var(--border); color: var(--text-light);">
+                      <th style="padding: 16px; font-weight: 600;">Name</th>
+                      <th style="padding: 16px; font-weight: 600;">Role</th>
+                      <th style="padding: 16px; font-weight: 600;">Status</th>
+                      <th style="padding: 16px; font-weight: 600;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                      <td style="padding: 16px; display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">JD</div>
+                        <span style="font-weight: 600; color: var(--text-dark);">John Doe</span>
+                      </td>
+                      <td style="padding: 16px; color: var(--text-light);">Admin</td>
+                      <td style="padding: 16px;"><span style="background: rgba(53, 99, 233, 0.1); color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Active</span></td>
+                      <td style="padding: 16px;"><a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">Edit</a></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 16px; display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--secondary); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">AS</div>
+                        <span style="font-weight: 600; color: var(--text-dark);">Alice Smith</span>
+                      </td>
+                      <td style="padding: 16px; color: var(--text-light);">Customer</td>
+                      <td style="padding: 16px;"><span style="background: rgba(53, 99, 233, 0.1); color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Active</span></td>
+                      <td style="padding: 16px;"><a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600;">Edit</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `,
+          products: `
+            <div class="card" style="grid-column: 1 / -1; min-height: 400px;">
+              <div class="card-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <span>Products</span>
+                <button style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">+ Add Product</button>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px;">
+                <div style="border: 1px solid var(--border); border-radius: var(--border-radius); padding: 24px; text-align: center;">
+                  <div style="height: 120px; display: flex; align-items: center; justify-content: center; background: #f6f7f9; border-radius: 8px; margin-bottom: 16px;">
+                    <img src="assets/images/cars/Nissan GT-R(2).svg" alt="Car" style="max-width: 80%; max-height: 80%;" onerror="this.style.display='none'">
+                  </div>
+                  <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark);">Nissan GT-R</h3>
+                  <p style="color: var(--text-light); margin-bottom: 16px; font-size: 14px;">Sport Car</p>
+                  <div style="font-size: 20px; font-weight: 700; color: var(--text-dark);">$80.00 <span style="font-size: 14px; color: var(--text-light); font-weight: 500;">/ day</span></div>
+                </div>
+                <div style="border: 1px solid var(--border); border-radius: var(--border-radius); padding: 24px; text-align: center;">
+                  <div style="height: 120px; display: flex; align-items: center; justify-content: center; background: #f6f7f9; border-radius: 8px; margin-bottom: 16px;">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="var(--border)"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h14l-4-5z"/></svg>
+                  </div>
+                  <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark);">Koenigsegg</h3>
+                  <p style="color: var(--text-light); margin-bottom: 16px; font-size: 14px;">Sport Car</p>
+                  <div style="font-size: 20px; font-weight: 700; color: var(--text-dark);">$99.00 <span style="font-size: 14px; color: var(--text-light); font-weight: 500;">/ day</span></div>
+                </div>
+              </div>
+            </div>
+          `,
+        };
+
+        const navItems = document.querySelectorAll("#main-menu-nav .nav-item");
+
+        navItems.forEach((item) => {
+          item.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const activeItem = document.querySelector(
+              "#main-menu-nav .nav-item.active",
+            );
+            const activeTab = activeItem
+              ? activeItem.getAttribute("data-tab")
+              : null;
+
+            if (activeTab === "dashboard") {
+              originalDashboardHTML = dashboardContent.innerHTML;
+            }
+
+            navItems.forEach((nav) => nav.classList.remove("active"));
+            item.classList.add("active");
+
+            const newTab = item.getAttribute("data-tab");
+
+            if (newTab === "dashboard") {
+              dashboardContent.innerHTML = originalDashboardHTML;
+            } else if (templates[newTab]) {
+              dashboardContent.innerHTML = templates[newTab];
+
+              if (newTab === "users") {
+                // CONTINUE HERE...
+              }
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>

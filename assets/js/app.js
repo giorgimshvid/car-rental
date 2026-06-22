@@ -349,17 +349,24 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
   } else if (pathName.includes("dashboard")) {
-    const url =
-      "https://raw.githubusercontent.com/Gkhundadze/car-rental-car-data/refs/heads/main/carData.json";
+    const userFromSessionStorage = await getDataFromSessionStorage("user");
+
+    if (!userFromSessionStorage) {
+      console.log("No user found in session storage");
+      window.location.href = "index.html";
+      return;
+    } else if (userFromSessionStorage.role !== "admin") {
+      console.log("User is not an admin");
+      window.location.href = "index.html";
+      return;
+    }
+
     const transactionsContainer = document.getElementById(
       "recent-transactions",
     );
 
-    console.log("TEST1");
-
     try {
-      const response = await fetch(url);
-      const data = await response.json();
+      const data = await fetchData(CARS_API);
 
       // Take first 4 items
       const recentCars = data.slice(0, 4);
@@ -417,14 +424,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Logout
-    const logoutBtn = document.querySelector("aside.sidebar .logout");
 
-    const ctaWrapper = document.querySelector(".navigation .cta-wrapper");
-console.log(ctaWrapper)
+    const ctaWrapper = document.querySelector("header.header .cta-wrapper");
+
+    renderHeaderCta(ctaWrapper, userFromSessionStorage);
+
+    const logoutBtn = ctaWrapper.querySelector(".logout-btn");
+
     logoutBtn.addEventListener("click", (e) => {
       e.preventDefault();
       AuthService.logout();
-      renderHeaderCta(ctaWrapper, null);
+      window.location.reload();
     });
   }
 });
