@@ -99,6 +99,7 @@
         --secondary: #54a6ff;
         --background: #f6f7f9;
         --white: #ffffff;
+        --danger:rgb(126, 27, 27);
         --text-dark: #1a202c;
         --text-light: #90a3bf;
         --border: rgba(195, 212, 233, 0.4);
@@ -716,6 +717,70 @@
         font-size: 16px;
         font-weight: 700;
       }
+
+      /* USERS TAB CONTENT */
+       tbody.users-list{
+        tr{
+          border-bottom: 1px solid var(--border);
+          &> .name{
+            padding: 16px;
+             display: flex;
+             align-items: center;
+              gap: 12px;
+               &>div{
+               width: 40px;
+              height: 40px;
+               &>img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+               border-radius: 50%;
+
+              }
+              }
+              &>span{
+                font-weight: 600;
+                 color: var(--text-dark);
+                  
+              }
+          }
+          &> .role{
+            padding: 16px; 
+            color: var(--text-light)
+          }
+          &> .status{
+            padding: 16px;
+             span {
+               background: rgba(53, 99, 233, 0.1);
+              color: var(--primary);
+              padding: 4px 12px;
+              border-radius: 20px;
+              font-size: 12px;
+              font-weight: 600;
+             }
+          }
+          .actions{
+            padding: 16px;
+            button{
+              font-weight: 600;
+              color:white;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 20px;
+              
+            }
+             .edit{
+              background-color: var(--primary);
+              
+              
+             }
+            .remove{
+              background-color:var(--danger)
+            }
+          }
+        }
+       } 
+
 
       /* RESPONSIVE DESIGN */
       .hamburger-menu {

@@ -22,6 +22,7 @@ import {
   renderCarCapacityFilter,
   togglePasswordVisibility,
   renderHeaderCta,
+  renderUsers
 } from "./ui.js";
 import { User } from "./User.js";
 import { AuthService } from "./AuthService.js";
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const usersFromLocalStorage = await getDataFromLocalStorage("users");
 
     if (!usersFromLocalStorage) {
-      saveDataToLocalStorage("users", dummyUsersData);
+      saveDataToLocalStorage("users", dummyUsersData);        
     }
 
     const userFromSessionStorage = await getDataFromSessionStorage("user");
@@ -351,6 +352,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   } else if (pathName.includes("dashboard")) {
     const userFromSessionStorage = await getDataFromSessionStorage("user");
 
+
+
     if (!userFromSessionStorage) {
       console.log("No user found in session storage");
       window.location.href = "index.html";
@@ -359,7 +362,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.log("User is not an admin");
       window.location.href = "index.html";
       return;
-    }
+    } 
 
     const transactionsContainer = document.getElementById(
       "recent-transactions",
@@ -436,6 +439,104 @@ document.addEventListener("DOMContentLoaded", async () => {
       AuthService.logout();
       window.location.reload();
     });
+
+     const dashboardContent = document.querySelector(".dashboard-content");
+        let originalDashboardHTML = "";
+
+        const templates = {
+          inbox: `
+            <div class="card" style="grid-column: 1 / -1; min-height: 400px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="var(--text-light)" style="margin-bottom: 16px;">
+                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              <h2 style="font-size: 24px; color: var(--text-dark); margin-bottom: 8px;">Your Inbox is Empty</h2>
+              <p style="color: var(--text-light);">You don't have any new messages at the moment.</p>
+            </div>
+          `,
+          users: `
+            <div class="card" style="grid-column: 1 / -1; min-height: 400px;">
+              <div class="card-title" style="margin-bottom: 24px;">Manage Users</div>
+              <div style="overflow-x: auto;">
+                <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                  <thead>
+                    <tr style="border-bottom: 1px solid var(--border); color: var(--text-light);">
+                      <th style="padding: 16px; font-weight: 600;">Name</th>
+                      <th style="padding: 16px; font-weight: 600;">Role</th>
+                      <th style="padding: 16px; font-weight: 600;">Status</th>
+                      <th style="padding: 16px; font-weight: 600;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody class="users-list">
+                    
+               
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `,
+          products: `
+            <div class="card" style="grid-column: 1 / -1; min-height: 400px;">
+              <div class="card-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <span>Products</span>
+                <button style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">+ Add Product</button>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px;">
+                <div style="border: 1px solid var(--border); border-radius: var(--border-radius); padding: 24px; text-align: center;">
+                  <div style="height: 120px; display: flex; align-items: center; justify-content: center; background: #f6f7f9; border-radius: 8px; margin-bottom: 16px;">
+                    <img src="assets/images/cars/Nissan GT-R(2).svg" alt="Car" style="max-width: 80%; max-height: 80%;" onerror="this.style.display='none'">
+                  </div>
+                  <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark);">Nissan GT-R</h3>
+                  <p style="color: var(--text-light); margin-bottom: 16px; font-size: 14px;">Sport Car</p>
+                  <div style="font-size: 20px; font-weight: 700; color: var(--text-dark);">$80.00 <span style="font-size: 14px; color: var(--text-light); font-weight: 500;">/ day</span></div>
+                </div>
+                <div style="border: 1px solid var(--border); border-radius: var(--border-radius); padding: 24px; text-align: center;">
+                  <div style="height: 120px; display: flex; align-items: center; justify-content: center; background: #f6f7f9; border-radius: 8px; margin-bottom: 16px;">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="var(--border)"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h14l-4-5z"/></svg>
+                  </div>
+                  <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark);">Koenigsegg</h3>
+                  <p style="color: var(--text-light); margin-bottom: 16px; font-size: 14px;">Sport Car</p>
+                  <div style="font-size: 20px; font-weight: 700; color: var(--text-dark);">$99.00 <span style="font-size: 14px; color: var(--text-light); font-weight: 500;">/ day</span></div>
+                </div>
+              </div>
+            </div>
+          `,
+        };
+
+        const navItems = document.querySelectorAll("#main-menu-nav .nav-item");
+
+        navItems.forEach((item) => {
+          item.addEventListener("click",async (e) => {
+            e.preventDefault();
+
+            const activeItem = document.querySelector(
+              "#main-menu-nav .nav-item.active",
+            );
+            const activeTab = activeItem
+              ? activeItem.getAttribute("data-tab")
+              : null;
+
+            if (activeTab === "dashboard") {
+              originalDashboardHTML = dashboardContent.innerHTML;
+            }
+
+            navItems.forEach((nav) => nav.classList.remove("active"));
+            item.classList.add("active");
+
+            const newTab = item.getAttribute("data-tab");
+
+            if (newTab === "dashboard") {
+              dashboardContent.innerHTML = originalDashboardHTML;
+            } else if (templates[newTab]) {
+              dashboardContent.innerHTML = templates[newTab];
+
+              if (newTab === "users") {
+                const  users=await  getDataFromLocalStorage('users')
+                const usersWrapper=dashboardContent.querySelector("tbody.users-list")
+                renderUsers(usersWrapper,users)
+              }
+            }
+          });
+        });
   }
 });
 
@@ -475,3 +576,5 @@ async function hashPassword(password) {
     console.error(err);
   }
 }
+
+

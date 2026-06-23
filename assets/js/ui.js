@@ -158,3 +158,41 @@ export function renderHeaderCta(wrapper, user) {
 
   wrapper.innerHTML = ctaContent;
 }
+
+export function renderUsers(wrapper, users) {
+  users.forEach((user) => {
+    const tr = `
+      <tr    >
+        <td   class="name">
+          <div
+             
+          >
+             <img src="${user.profilePhotoUrl}" alt=${user.firstName} >
+          </div>
+          <span 
+            >${user.firstName + " " + user.lastName}</span
+          >
+        </td>
+        <td  class="role">${user.role}</td>
+        <td class="status">
+          <span
+ 
+            >Active</span
+          >
+        </td>
+        <td  class="actions">
+          <button class="edit"
+           >
+            Edit
+          </button>
+          <button class="remove"
+           >
+            Delete
+          </button>
+        </td>
+      </tr>
+     `;
+
+    wrapper.insertAdjacentHTML("beforeend", tr);
+  });
+}
