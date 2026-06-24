@@ -22,7 +22,9 @@ import {
   renderCarCapacityFilter,
   togglePasswordVisibility,
   renderHeaderCta,
-  renderUsers
+  renderUsers,
+  renderEditUserModal,
+  setupEditUserModalEvents,
 } from "./ui.js";
 import { User } from "./User.js";
 import { AuthService } from "./AuthService.js";
@@ -60,7 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const usersFromLocalStorage = await getDataFromLocalStorage("users");
 
     if (!usersFromLocalStorage) {
-      saveDataToLocalStorage("users", dummyUsersData);        
+      saveDataToLocalStorage("users", dummyUsersData);
     }
 
     const userFromSessionStorage = await getDataFromSessionStorage("user");
@@ -362,12 +364,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.log("User is not an admin");
       window.location.href = "index.html";
       return;
-    } 
+    }
+
+    // Render modal HTML into the DOM (once) and wire open/close events
+    renderEditUserModal();
+    const { openModal, closeModal } = setupEditUserModalEvents();
 
     const transactionsContainer = document.getElementById(
       "recent-transactions",
     );
-
+    
     try {
       const data = await fetchData(CARS_API);
 
@@ -440,11 +446,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       window.location.reload();
     });
 
-     const dashboardContent = document.querySelector(".dashboard-content");
-        let originalDashboardHTML = "";
+    const dashboardContent = document.querySelector(".dashboard-content");
+    let originalDashboardHTML = "";
 
-        const templates = {
-          inbox: `
+    const templates = {
+      inbox: `
             <div class="card" style="grid-column: 1 / -1; min-height: 400px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
               <svg width="64" height="64" viewBox="0 0 24 24" fill="var(--text-light)" style="margin-bottom: 16px;">
                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
@@ -453,7 +459,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               <p style="color: var(--text-light);">You don't have any new messages at the moment.</p>
             </div>
           `,
-          users: `
+      users: `
             <div class="card" style="grid-column: 1 / -1; min-height: 400px;">
               <div class="card-title" style="margin-bottom: 24px;">Manage Users</div>
               <div style="overflow-x: auto;">
@@ -467,14 +473,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                     </tr>
                   </thead>
                   <tbody class="users-list">
-                    
-               
+
+
                   </tbody>
                 </table>
               </div>
             </div>
           `,
-          products: `
+      products: `
             <div class="card" style="grid-column: 1 / -1; min-height: 400px;">
               <div class="card-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
                 <span>Products</span>
@@ -500,43 +506,75 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
             </div>
           `,
-        };
+    };
 
-        const navItems = document.querySelectorAll("#main-menu-nav .nav-item");
+    const navItems = document.querySelectorAll("#main-menu-nav .nav-item");
 
-        navItems.forEach((item) => {
-          item.addEventListener("click",async (e) => {
-            e.preventDefault();
+    navItems.forEach((item) => {
+      item.addEventListener("click", async (e) => {
+        e.preventDefault();
 
-            const activeItem = document.querySelector(
-              "#main-menu-nav .nav-item.active",
-            );
-            const activeTab = activeItem
-              ? activeItem.getAttribute("data-tab")
-              : null;
+        const activeItem = document.querySelector(
+          "#main-menu-nav .nav-item.active",
+        );
+        const activeTab = activeItem
+          ? activeItem.getAttribute("data-tab")
+          : null;
 
-            if (activeTab === "dashboard") {
-              originalDashboardHTML = dashboardContent.innerHTML;
-            }
+        if (activeTab === "dashboard") {
+          originalDashboardHTML = dashboardContent.innerHTML;
+        }
 
-            navItems.forEach((nav) => nav.classList.remove("active"));
-            item.classList.add("active");
+        navItems.forEach((nav) => nav.classList.remove("active"));
+        item.classList.add("active");
 
-            const newTab = item.getAttribute("data-tab");
+        const newTab = item.getAttribute("data-tab");
 
-            if (newTab === "dashboard") {
-              dashboardContent.innerHTML = originalDashboardHTML;
-            } else if (templates[newTab]) {
-              dashboardContent.innerHTML = templates[newTab];
+        if (newTab === "dashboard") {
+          dashboardContent.innerHTML = originalDashboardHTML;
+        } else if (templates[newTab]) {
+          dashboardContent.innerHTML = templates[newTab];
 
-              if (newTab === "users") {
-                const  users=await  getDataFromLocalStorage('users')
-                const usersWrapper=dashboardContent.querySelector("tbody.users-list")
-                renderUsers(usersWrapper,users)
+          if (newTab === "users") {
+            let users = await getDataFromLocalStorage('users')
+            const usersWrapper = dashboardContent.querySelector("tbody.users-list")
+
+            renderUsers(usersWrapper, users)
+
+            usersWrapper.addEventListener('click', (e) => {
+              if (e.target.classList.contains('remove')) {
+                const userId = e.target.closest(".actions").getAttribute("data-id");
+                users = users.filter((u) => u.id !== userId);
+                saveDataToLocalStorage("users", users);
+                renderUsers(usersWrapper, users);
               }
-            }
-          });
-        });
+
+
+              if (e.target.classList.contains('edit')) {
+                const userId = e.target.closest(".actions").getAttribute("data-id");
+                const userToEdit = users.find((u) => u.id === userId);
+                if (userToEdit) {
+                  document.getElementById("edit-user-id").value = userToEdit.id;
+                  document.getElementById("edit-firstname").value = userToEdit.firstName;
+                  document.getElementById("edit-lastname").value = userToEdit.lastName;
+                  document.getElementById("edit-email").value = userToEdit.email;
+                  document.getElementById("edit-role").value = userToEdit.role;
+
+                  // Clear previous error states
+                  document.querySelectorAll("#edit-user-form .form-group").forEach((g) =>
+                    g.classList.remove("has-error")
+                  );
+
+                  openModal();
+                }
+              }
+            })
+
+
+          }
+        }
+      });
+    });
   }
 });
 

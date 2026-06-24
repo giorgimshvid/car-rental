@@ -160,27 +160,28 @@ export function renderHeaderCta(wrapper, user) {
 }
 
 export function renderUsers(wrapper, users) {
+  wrapper.innerHTML = ""
   users.forEach((user) => {
     const tr = `
       <tr    >
         <td   class="name">
           <div
-             
+
           >
              <img src="${user.profilePhotoUrl}" alt=${user.firstName} >
           </div>
-          <span 
+          <span
             >${user.firstName + " " + user.lastName}</span
           >
         </td>
         <td  class="role">${user.role}</td>
         <td class="status">
           <span
- 
+
             >Active</span
           >
         </td>
-        <td  class="actions">
+        <td  class="actions" data-id="${user.id}">
           <button class="edit"
            >
             Edit
@@ -195,4 +196,119 @@ export function renderUsers(wrapper, users) {
 
     wrapper.insertAdjacentHTML("beforeend", tr);
   });
+}
+
+/**
+ * Injects the Edit User modal HTML into the DOM (only once).
+ * Returns the modal overlay element.
+ */
+export function renderEditUserModal() {
+  const existing = document.getElementById("edit-user-modal");
+  if (existing) return existing;
+
+  const modal = document.createElement("div");
+  modal.id = "edit-user-modal";
+  modal.className = "modal-overlay";
+  modal.innerHTML = `
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Edit User</h3>
+        <button class="modal-close-btn" id="close-modal-btn" aria-label="Close modal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <form class="modal-form" id="edit-user-form" novalidate>
+        <input type="hidden" id="edit-user-id" />
+        <div class="form-group">
+          <label for="edit-firstname">First Name</label>
+          <input type="text" id="edit-firstname" placeholder="Enter first name" required />
+          <span class="error-msg" id="error-firstname">First name must be between 2 and 50 letters.</span>
+        </div>
+        <div class="form-group">
+          <label for="edit-lastname">Last Name</label>
+          <input type="text" id="edit-lastname" placeholder="Enter last name" required />
+          <span class="error-msg" id="error-lastname">Last name must be between 2 and 50 letters.</span>
+        </div>
+        <div class="form-group">
+          <label for="edit-email">Email Address</label>
+          <input type="email" id="edit-email" placeholder="Enter email address" required />
+          <span class="error-msg" id="error-email">Please enter a valid email address.</span>
+          <span class="error-msg" id="error-email-exists">This email is already in use.</span>
+        </div>
+        <div class="form-group">
+          <label for="edit-role">Role</label>
+          <select id="edit-role" required>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+          <span class="error-msg" id="error-role">Please select a valid role.</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="modal-btn modal-btn-cancel" id="cancel-modal-btn">Cancel</button>
+          <button type="submit" class="modal-btn modal-btn-save">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  return modal;
+}
+
+/**
+ * Sets up open/close behavior for the Edit User modal.
+ * @param {Function} onOpen  - optional callback when modal opens
+ * @param {Function} onClose - optional callback when modal closes
+ * @returns {{ openModal: Function, closeModal: Function }}
+ */
+export function setupEditUserModalEvents(onOpen, onClose) {
+  const modal = document.getElementById("edit-user-modal");
+  if (!modal) return {};
+
+  const closeModal = () => {
+    modal.classList.remove("active");
+    if (typeof onClose === "function") onClose();
+  };
+
+  const openModal = () => {
+    modal.classList.add("active");
+    if (typeof onOpen === "function") onOpen();
+
+  };
+
+  const handleUserEditSubmit = (e) => {
+     e.preventDefault()
+  }
+
+  /*
+    
+
+
+  */
+
+  // Close on X button
+  document.getElementById("close-modal-btn")?.addEventListener("click", closeModal);
+
+  // Close on Cancel button
+  document.getElementById("cancel-modal-btn")?.addEventListener("click", closeModal);
+
+  // Close on backdrop click
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("active")) closeModal();
+  });
+
+  document
+    .getElementById("edit-user-form")
+    .addEventListener("submit", handleUserEditSubmit);
+
+  return { openModal, closeModal };
 }
