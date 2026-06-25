@@ -160,7 +160,7 @@ export function renderHeaderCta(wrapper, user) {
 }
 
 export function renderUsers(wrapper, users) {
-  wrapper.innerHTML = ""
+  wrapper.innerHTML = "";
   users.forEach((user) => {
     const tr = `
       <tr    >
@@ -277,12 +277,11 @@ export function setupEditUserModalEvents(onOpen, onClose) {
   const openModal = () => {
     modal.classList.add("active");
     if (typeof onOpen === "function") onOpen();
-
   };
 
   const handleUserEditSubmit = (e) => {
-     e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   /*
     
@@ -291,10 +290,14 @@ export function setupEditUserModalEvents(onOpen, onClose) {
   */
 
   // Close on X button
-  document.getElementById("close-modal-btn")?.addEventListener("click", closeModal);
+  document
+    .getElementById("close-modal-btn")
+    ?.addEventListener("click", closeModal);
 
   // Close on Cancel button
-  document.getElementById("cancel-modal-btn")?.addEventListener("click", closeModal);
+  document
+    .getElementById("cancel-modal-btn")
+    ?.addEventListener("click", closeModal);
 
   // Close on backdrop click
   modal.addEventListener("click", (e) => {

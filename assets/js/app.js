@@ -354,8 +354,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   } else if (pathName.includes("dashboard")) {
     const userFromSessionStorage = await getDataFromSessionStorage("user");
 
-
-
     if (!userFromSessionStorage) {
       console.log("No user found in session storage");
       window.location.href = "index.html";
@@ -373,7 +371,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const transactionsContainer = document.getElementById(
       "recent-transactions",
     );
-    
+
     try {
       const data = await fetchData(CARS_API);
 
@@ -536,41 +534,104 @@ document.addEventListener("DOMContentLoaded", async () => {
           dashboardContent.innerHTML = templates[newTab];
 
           if (newTab === "users") {
-            let users = await getDataFromLocalStorage('users')
-            const usersWrapper = dashboardContent.querySelector("tbody.users-list")
+            let users = await getDataFromLocalStorage("users");
+            const usersWrapper =
+              dashboardContent.querySelector("tbody.users-list");
+            const userEditFormWrapper =
+              document.querySelector("#edit-user-form");
 
-            renderUsers(usersWrapper, users)
+            renderUsers(usersWrapper, users);
 
-            usersWrapper.addEventListener('click', (e) => {
-              if (e.target.classList.contains('remove')) {
-                const userId = e.target.closest(".actions").getAttribute("data-id");
+            usersWrapper.addEventListener("click", (e) => {
+              if (e.target.classList.contains("remove")) {
+                const userId = e.target
+                  .closest(".actions")
+                  .getAttribute("data-id");
                 users = users.filter((u) => u.id !== userId);
                 saveDataToLocalStorage("users", users);
                 renderUsers(usersWrapper, users);
               }
 
-
-              if (e.target.classList.contains('edit')) {
-                const userId = e.target.closest(".actions").getAttribute("data-id");
+              if (e.target.classList.contains("edit")) {
+                const userId = e.target
+                  .closest(".actions")
+                  .getAttribute("data-id");
                 const userToEdit = users.find((u) => u.id === userId);
                 if (userToEdit) {
                   document.getElementById("edit-user-id").value = userToEdit.id;
-                  document.getElementById("edit-firstname").value = userToEdit.firstName;
-                  document.getElementById("edit-lastname").value = userToEdit.lastName;
-                  document.getElementById("edit-email").value = userToEdit.email;
+                  document.getElementById("edit-firstname").value =
+                    userToEdit.firstName;
+                  document.getElementById("edit-lastname").value =
+                    userToEdit.lastName;
+                  document.getElementById("edit-email").value =
+                    userToEdit.email;
                   document.getElementById("edit-role").value = userToEdit.role;
 
                   // Clear previous error states
-                  document.querySelectorAll("#edit-user-form .form-group").forEach((g) =>
-                    g.classList.remove("has-error")
-                  );
+                  document
+                    .querySelectorAll("#edit-user-form .form-group")
+                    .forEach((g) => g.classList.remove("has-error"));
 
                   openModal();
                 }
               }
-            })
+            });
 
+            userEditFormWrapper.addEventListener("submit", async (e) => {
+              const firstName =
+                userEditFormWrapper.querySelector("#edit-firstname").value;
+              const lastName =
+                userEditFormWrapper.querySelector("#edit-lastname").value;
+              const email =
+                userEditFormWrapper.querySelector("#edit-email").value;
+              const role =
+                userEditFormWrapper.querySelector("#edit-role").value;
 
+              const firstNameValidation = validateName(firstName.trim());
+              if (!firstNameValidation) {
+                console.log("error validating firstname");
+                return;
+              }
+              const lastNameValidation = validateName(lastName.trim());
+              if (!lastNameValidation) {
+                console.log("erorr validating lastname");
+                return;
+              }
+              const emailValidation = validateEmail(email.trim());
+              if (!emailValidation) {
+                console.log("error validating email");
+                return;
+              }
+              const userExists = checkExistingUser(
+                email.trim(),
+                (await getDataFromLocalStorage("users")) || [],
+              );
+              if (userExists) {
+                console.log("User with this email already exists");
+                return;
+              }
+
+              const userId =
+                userEditFormWrapper.querySelector("#edit-user-id").value;
+
+              users = users.map((user) => {
+                if (user.id === userId) {
+                  return new User(
+                    firstName,
+                    lastName,
+                    email,
+                    user.password,
+                    role,
+                    user.profilePhotoUrl,
+                  );
+                }
+                return user;
+              });
+
+              await saveDataToLocalStorage("users", users);
+              renderUsers(usersWrapper, users);
+              closeModal();
+            });
           }
         }
       });
@@ -614,5 +675,3 @@ async function hashPassword(password) {
     console.error(err);
   }
 }
-
-
