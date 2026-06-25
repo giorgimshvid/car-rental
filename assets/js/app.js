@@ -15,6 +15,7 @@ import {
   validateEmail,
   validatePasswordMatch,
   checkExistingUser,
+  validateImageURL,
 } from "./validations.js";
 import {
   renderCars,
@@ -607,6 +608,14 @@ document.addEventListener("DOMContentLoaded", async () => {
               if (!lastNameValidation) {
                 console.log("erorr validating lastname");
                 return;
+              }
+
+              if (image) {
+                const imageValidation = await validateImageURL(image);
+                if (!imageValidation) {
+                  console.log("Error validating the image URL");
+                  return;
+                }
               }
 
               if (email !== oldUser.email) {

@@ -14,7 +14,7 @@ export class User {
     this.password = password;
     this.role = role;
     this.profilePhotoUrl =
-      profilePhotoUrl || "assets/images/icons/profile photo.png";
+      profilePhotoUrl || "assets/images/icons/user-avatar.png";
     this.createdAt = Date.now();
   }
 

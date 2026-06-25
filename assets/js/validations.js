@@ -19,6 +19,19 @@ function validatePasswordMatch(password, retypePassword) {
   return password === retypePassword;
 }
 
+async function validateImageURL(imageURL) {
+  try {
+    const response = await fetch(imageURL);
+    if (response.status === 404) {
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
 function checkExistingUser(email, users) {
   return users.some((user) => user.email === email);
 }
@@ -29,4 +42,5 @@ export {
   validateEmail,
   validatePasswordMatch,
   checkExistingUser,
+  validateImageURL,
 };
