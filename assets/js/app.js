@@ -26,6 +26,7 @@ import {
   renderEditUserModal,
   setupEditUserModalEvents,
 } from "./ui.js";
+import areObjectsEqual from "./utils.js";
 import { User } from "./User.js";
 import { AuthService } from "./AuthService.js";
 
@@ -566,6 +567,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                   document.getElementById("edit-email").value =
                     userToEdit.email;
                   document.getElementById("edit-role").value = userToEdit.role;
+                  document.getElementById("edit-image").value =
+                    userToEdit.profilePhotoUrl;
 
                   // Clear previous error states
                   document
@@ -578,12 +581,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
 
             userEditFormWrapper.addEventListener("submit", async (e) => {
+              const userId =
+                userEditFormWrapper.querySelector("#edit-user-id").value;
+              const oldUser = users.find((user) => user.id === userId);
+
               const firstName =
                 userEditFormWrapper.querySelector("#edit-firstname").value;
               const lastName =
                 userEditFormWrapper.querySelector("#edit-lastname").value;
               const email =
                 userEditFormWrapper.querySelector("#edit-email").value;
+              const password =
+                userEditFormWrapper.querySelector("#edit-password").value;
+              const image =
+                userEditFormWrapper.querySelector("#edit-image").value;
               const role =
                 userEditFormWrapper.querySelector("#edit-role").value;
 
@@ -597,39 +608,61 @@ document.addEventListener("DOMContentLoaded", async () => {
                 console.log("erorr validating lastname");
                 return;
               }
-              const emailValidation = validateEmail(email.trim());
-              if (!emailValidation) {
-                console.log("error validating email");
-                return;
-              }
-              const userExists = checkExistingUser(
-                email.trim(),
-                (await getDataFromLocalStorage("users")) || [],
-              );
-              if (userExists) {
-                console.log("User with this email already exists");
-                return;
-              }
 
-              const userId =
-                userEditFormWrapper.querySelector("#edit-user-id").value;
-
-              users = users.map((user) => {
-                if (user.id === userId) {
-                  return new User(
-                    firstName,
-                    lastName,
-                    email,
-                    user.password,
-                    role,
-                    user.profilePhotoUrl,
-                  );
+              if (email !== oldUser.email) {
+                const emailValidation = validateEmail(email.trim());
+                if (!emailValidation) {
+                  console.log("error validating email");
+                  return;
                 }
-                return user;
-              });
 
-              await saveDataToLocalStorage("users", users);
-              renderUsers(usersWrapper, users);
+                const userExists = checkExistingUser(
+                  email.trim(),
+                  (await getDataFromLocalStorage("users")) || [],
+                );
+                if (userExists) {
+                  console.log("User with this email already exists");
+                  return;
+                }
+              }
+
+              let hashedPassword = undefined;
+              if (password) {
+                const passwordValidation = validatePassword(password);
+                if (!passwordValidation) {
+                  console.log("error validating password");
+                  return;
+                }
+
+                hashedPassword = await hashPassword(password);
+              }
+
+              const newUser = new User(
+                firstName,
+                lastName,
+                email,
+                hashedPassword || oldUser.password,
+                role,
+                image,
+              );
+              newUser.id = oldUser.id;
+              newUser.createdAt = oldUser.createdAt;
+
+              if (!areObjectsEqual(newUser, oldUser)) {
+                users = users.map((user) => {
+                  if (user.id === userId) {
+                    return newUser;
+                  }
+                  return user;
+                });
+
+                await saveDataToLocalStorage("users", users);
+                renderUsers(usersWrapper, users);
+                console.log("User data has been updated.");
+              } else {
+                console.log("New user data is same as old user data.");
+              }
+
               closeModal();
             });
           }

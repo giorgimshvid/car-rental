@@ -240,6 +240,16 @@ export function renderEditUserModal() {
           <span class="error-msg" id="error-email-exists">This email is already in use.</span>
         </div>
         <div class="form-group">
+          <label for="edit-password">Password</label>
+          <input type="text" id="edit-password" placeholder="Enter password" required />
+          <span class="error-msg" id="error-password">Please enter a valid password.</span>
+        </div>
+        <div class="form-group">
+          <label for="edit-image">Image</label>
+          <input type="text" id="edit-image" placeholder="Enter image URL" required />
+          <span class="error-msg" id="error-image">Please enter a valid image URL.</span>
+        </div>
+        <div class="form-group">
           <label for="edit-role">Role</label>
           <select id="edit-role" required>
             <option value="user">User</option>
