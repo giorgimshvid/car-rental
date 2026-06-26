@@ -198,6 +198,78 @@ export function renderUsers(wrapper, users) {
   });
 }
 
+export function renderProducts(wrapper, products) {
+  wrapper.innerHTML = "";
+  products.forEach((product) => {
+    const tr = `
+      <tr>
+        <td class="image">
+          <div>
+             <img src="${product.image}" alt=${product.brand + " " + product.model} width="40px" >
+          </div>
+        </td>
+        <td class="brand">
+          <div>
+          <span>${product.brand}</span>
+          </div>
+        </td>
+        <td class="model">
+          <div>
+          <span>${product.model}</span>
+          </div>
+        </td>
+        <td class="type">
+          <div>
+          <span>${product.type}</span>
+          </div>
+        </td>
+        <td class="price">
+          <div>
+          <span>${product.pricePerDay} $</span>
+          </div>
+        </td>
+        <td class="transmission">
+          <div>
+          <span>${product.transmission}</span>
+          </div>
+        </td>
+        <td class="fuel">
+          <div>
+          <span>${product.fuelCapacity} L</span>
+          </div>
+        </td>
+        <td class="seats">
+          <div>
+          <span>${product.seats}</span>
+          </div>
+        </td>
+        <td class="available">
+          <div>
+          <span>${product.available ? "Yes" : "No"}</span>
+          </div>
+        </td>
+        <td class="created">
+          <div>
+          <span>${new Date(product.createdAt).toLocaleDateString()}</span>
+          </div>
+        </td>
+        <td  class="actions" data-id="${product.id}">
+          <button class="edit"
+           >
+            Edit
+          </button>
+          <button class="remove"
+           >
+            Delete
+          </button>
+        </td>
+      </tr>
+     `;
+
+    wrapper.insertAdjacentHTML("beforeend", tr);
+  });
+}
+
 /**
  * Injects the Edit User modal HTML into the DOM (only once).
  * Returns the modal overlay element.

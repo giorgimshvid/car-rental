@@ -26,6 +26,7 @@ import {
   renderUsers,
   renderEditUserModal,
   setupEditUserModalEvents,
+  renderProducts,
 } from "./ui.js";
 import areObjectsEqual from "./utils.js";
 import { User } from "./User.js";
@@ -484,25 +485,30 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="card" style="grid-column: 1 / -1; min-height: 400px;">
               <div class="card-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
                 <span>Products</span>
-                <button style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">+ Add Product</button>
+                <button class="add-product" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">+ Add Product</button>
               </div>
-              <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px;">
-                <div style="border: 1px solid var(--border); border-radius: var(--border-radius); padding: 24px; text-align: center;">
-                  <div style="height: 120px; display: flex; align-items: center; justify-content: center; background: #f6f7f9; border-radius: 8px; margin-bottom: 16px;">
-                    <img src="assets/images/cars/Nissan GT-R(2).svg" alt="Car" style="max-width: 80%; max-height: 80%;" onerror="this.style.display='none'">
-                  </div>
-                  <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark);">Nissan GT-R</h3>
-                  <p style="color: var(--text-light); margin-bottom: 16px; font-size: 14px;">Sport Car</p>
-                  <div style="font-size: 20px; font-weight: 700; color: var(--text-dark);">$80.00 <span style="font-size: 14px; color: var(--text-light); font-weight: 500;">/ day</span></div>
-                </div>
-                <div style="border: 1px solid var(--border); border-radius: var(--border-radius); padding: 24px; text-align: center;">
-                  <div style="height: 120px; display: flex; align-items: center; justify-content: center; background: #f6f7f9; border-radius: 8px; margin-bottom: 16px;">
-                    <svg width="64" height="64" viewBox="0 0 24 24" fill="var(--border)"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h14l-4-5z"/></svg>
-                  </div>
-                  <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark);">Koenigsegg</h3>
-                  <p style="color: var(--text-light); margin-bottom: 16px; font-size: 14px;">Sport Car</p>
-                  <div style="font-size: 20px; font-weight: 700; color: var(--text-dark);">$99.00 <span style="font-size: 14px; color: var(--text-light); font-weight: 500;">/ day</span></div>
-                </div>
+              <div class="products-table-wrapper" style="overflow-x: auto;">
+                <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                  <thead>
+                    <tr style="border-bottom: 1px solid var(--border); color: var(--text-light);">
+                      <th>Image</th>
+                      <th>Brand</th>
+                      <th>Model</th>
+                      <th>Type</th>
+                      <th>Price</th>
+                      <th>Transmission</th>
+                      <th>Fuel capacity</th>
+                      <th>Seats</th>
+                      <th>Available</th>
+                      <th>Created at</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody class="products-list">
+
+
+                  </tbody>
+                </table>
               </div>
             </div>
           `,
@@ -673,6 +679,33 @@ document.addEventListener("DOMContentLoaded", async () => {
               }
 
               closeModal();
+            });
+          }
+
+          if (newTab === "products") {
+            let products = await getDataFromLocalStorage("cars");
+            const productsWrapper = dashboardContent.querySelector(
+              "tbody.products-list",
+            );
+            const addProductBtn =
+              dashboardContent.querySelector(".add-product");
+
+            renderProducts(productsWrapper, products);
+
+            productsWrapper.addEventListener("click", (e) => {
+              if (e.target.classList.contains("remove")) {
+                const productId = e.target
+                  .closest(".actions")
+                  .getAttribute("data-id");
+                products = products.filter((p) => p.id !== productId);
+                saveDataToLocalStorage("cars", products);
+                renderProducts(productsWrapper, products);
+              }
+            });
+
+            addProductBtn.addEventListener("click", () => {
+              console.log(addProductBtn);
+              
             });
           }
         }
