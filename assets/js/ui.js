@@ -103,9 +103,8 @@ export function togglePasswordVisibility(wrapper) {
 
 export function renderHeaderCta(wrapper, user) {
   const ctaContent = `
-    ${
-      user
-        ? `
+    ${user
+      ? `
       <div class="cta-btns">
         <a href="">
           <img
@@ -139,16 +138,15 @@ export function renderHeaderCta(wrapper, user) {
         </div>
       </div>
     `
-        : ""
+      : ""
     }
-    ${
-      user
-        ? `
+    ${user
+      ? `
       <div class="cta-auth-btns">
         <button class="logout-btn">Log out</button>
       </div>
     `
-        : `
+      : `
       <div class="cta-auth-btns">
         <a href="sign-up.html">Sign up</a>
         <a href="sign-in.html">Sign in</a>
@@ -281,74 +279,155 @@ export function renderModal(modalCondition) {
   const modal = document.createElement("div");
   modal.className = "modal-overlay";
   switch (modalCondition) {
-    case 'edit-user' : 
-    modal.id = "edit-user-modal";
-    modal.innerHTML = `
-    <div class="modal-box">
-      <div class="modal-header">
-        <h3>Edit User</h3>
-        <button class="modal-close-btn" id="close-modal-btn" aria-label="Close modal">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-      <form class="modal-form" id="edit-user-form" novalidate>
-        <input type="hidden" id="edit-user-id" />
-        <div class="form-group">
-          <label for="edit-firstname">First Name</label>
-          <input type="text" id="edit-firstname" placeholder="Enter first name" required />
-          <span class="error-msg" id="error-firstname">First name must be between 2 and 50 letters.</span>
+    case 'edit-user':
+      modal.id = "edit-user-modal";
+      modal.innerHTML = `
+        <div class="modal-box">
+          <div class="modal-header">
+            <h3>Edit User</h3>
+            <button class="modal-close-btn" id="close-modal-btn" aria-label="Close modal">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <form class="modal-form" id="edit-user-form" novalidate>
+            <input type="hidden" id="edit-user-id" />
+            <div class="form-group">
+              <label for="edit-firstname">First Name</label>
+              <input type="text" id="edit-firstname" placeholder="Enter first name" required />
+              <span class="error-msg" id="error-firstname">First name must be between 2 and 50 letters.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-lastname">Last Name</label>
+              <input type="text" id="edit-lastname" placeholder="Enter last name" required />
+              <span class="error-msg" id="error-lastname">Last name must be between 2 and 50 letters.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-email">Email Address</label>
+              <input type="email" id="edit-email" placeholder="Enter email address" required />
+              <span class="error-msg" id="error-email">Please enter a valid email address.</span>
+              <span class="error-msg" id="error-email-exists">This email is already in use.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-password">Password</label>
+              <input type="text" id="edit-password" placeholder="Enter password" required />
+              <span class="error-msg" id="error-password">Please enter a valid password.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-image">Image</label>
+              <input type="text" id="edit-image" placeholder="Enter image URL" required />
+              <span class="error-msg" id="error-image">Please enter a valid image URL.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-role">Role</label>
+              <select id="edit-role" required>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </select>
+              <span class="error-msg" id="error-role">Please select a valid role.</span>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="modal-btn modal-btn-cancel" id="cancel-modal-btn">Cancel</button>
+              <button type="submit" class="modal-btn modal-btn-save">Save Changes</button>
+            </div>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="edit-lastname">Last Name</label>
-          <input type="text" id="edit-lastname" placeholder="Enter last name" required />
-          <span class="error-msg" id="error-lastname">Last name must be between 2 and 50 letters.</span>
-        </div>
-        <div class="form-group">
-          <label for="edit-email">Email Address</label>
-          <input type="email" id="edit-email" placeholder="Enter email address" required />
-          <span class="error-msg" id="error-email">Please enter a valid email address.</span>
-          <span class="error-msg" id="error-email-exists">This email is already in use.</span>
-        </div>
-        <div class="form-group">
-          <label for="edit-password">Password</label>
-          <input type="text" id="edit-password" placeholder="Enter password" required />
-          <span class="error-msg" id="error-password">Please enter a valid password.</span>
-        </div>
-        <div class="form-group">
-          <label for="edit-image">Image</label>
-          <input type="text" id="edit-image" placeholder="Enter image URL" required />
-          <span class="error-msg" id="error-image">Please enter a valid image URL.</span>
-        </div>
-        <div class="form-group">
-          <label for="edit-role">Role</label>
-          <select id="edit-role" required>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
-          <span class="error-msg" id="error-role">Please select a valid role.</span>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="modal-btn modal-btn-cancel" id="cancel-modal-btn">Cancel</button>
-          <button type="submit" class="modal-btn modal-btn-save">Save Changes</button>
-        </div>
-      </form>
-    </div>
-  `;
-       break
-    case case2 :
-       break
-    case case3 :
+      `;
       break
-    case case4 :
-        break
-   default :     
+    case 'edit-car':
+      modal.id = "edit-car-modal";
+      modal.innerHTML = `
+        <div class="modal-box">
+          <div class="modal-header">
+            <h3>Edit Car</h3>
+            <button class="modal-close-btn" id="close-modal-btn" aria-label="Close modal">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <form class="modal-form" id="edit-car-form" novalidate>
+            <input type="hidden" id="edit-car-id" />
+            <div class="form-group">
+              <label for="edit-car-brand">Brand</label>
+              <input type="text" id="edit-car-brand" placeholder="Enter brand" required />
+              <span class="error-msg" id="error-car-brand">Brand must be between 2 and 50 characters.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-car-model">Model</label>
+              <input type="text" id="edit-car-model" placeholder="Enter model" required />
+              <span class="error-msg" id="error-car-model">Model must be between 2 and 100 characters.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-car-type">Type</label>
+              <select id="edit-car-type" required>
+                <option value="sedan">Sedan</option>
+                <option value="suv">SUV</option>
+                <option value="hatchback">Hatchback</option>
+                <option value="convertible">Convertible</option>
+                <option value="pickup">Pickup</option>
+                <option value="minivan">Minivan</option>
+                <option value="coupe">Coupe</option>
+              </select>
+              <span class="error-msg" id="error-car-type">Please select a valid car type.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-car-price">Price Per Day ($)</label>
+              <input type="number" id="edit-car-price" placeholder="Enter price per day" min="1" required />
+              <span class="error-msg" id="error-car-price">Price must be a positive number.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-car-image">Image URL</label>
+              <input type="text" id="edit-car-image" placeholder="Enter image URL" required />
+              <span class="error-msg" id="error-car-image">Please enter a valid image URL.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-car-transmission">Transmission</label>
+              <select id="edit-car-transmission" required>
+                <option value="Automatic">Automatic</option>
+                <option value="Manual">Manual</option>
+              </select>
+              <span class="error-msg" id="error-car-transmission">Please select a valid transmission type.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-car-fuel">Fuel Capacity (L)</label>
+              <input type="number" id="edit-car-fuel" placeholder="Enter fuel capacity" min="1" required />
+              <span class="error-msg" id="error-car-fuel">Fuel capacity must be a positive number.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-car-seats">Seats</label>
+              <input type="number" id="edit-car-seats" placeholder="Enter number of seats" min="1" max="20" required />
+              <span class="error-msg" id="error-car-seats">Seats must be between 1 and 20.</span>
+            </div>
+            <div class="form-group">
+              <label for="edit-car-available">Available</label>
+              <select id="edit-car-available" required>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+              <span class="error-msg" id="error-car-available">Please select availability.</span>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="modal-btn modal-btn-cancel" id="cancel-modal-btn">Cancel</button>
+              <button type="submit" class="modal-btn modal-btn-save">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      `;
+      break
+    case case3:
+      break
+    case case4:
+      break
+    default:
 
   }
-  
+
 
   document.body.appendChild(modal);
   return modal;
@@ -361,7 +440,7 @@ export function renderModal(modalCondition) {
  * @returns {{ openModal: Function, closeModal: Function }}
  */
 export function setupModalEvents(onOpen, onClose) {
-  const modal = document.getElementById("edit-user-modal");
+  const modal = document.querySelector(".modal-overlay");
   if (!modal) return {};
 
   const closeModal = () => {
@@ -374,7 +453,7 @@ export function setupModalEvents(onOpen, onClose) {
     if (typeof onOpen === "function") onOpen();
   };
 
-  const handleUserEditSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
   };
 
@@ -405,8 +484,8 @@ export function setupModalEvents(onOpen, onClose) {
   });
 
   document
-    .getElementById("edit-user-form")
-    .addEventListener("submit", handleUserEditSubmit);
+    .querySelector(".modal-overlay form")
+    .addEventListener("submit", handleSubmit);
 
   return { openModal, closeModal };
 }

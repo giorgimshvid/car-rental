@@ -1,4 +1,5 @@
 const bcrypt = window.dcodeIO ? window.dcodeIO.bcrypt : "";
+// const bcrypt = window.dcodeIO.bcrypt;
 
 import { fetchData } from "./api.js";
 import {
@@ -686,15 +687,24 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           if (newTab === "products") {
             let products = await getDataFromLocalStorage("cars");
+            
+            renderModal("edit-car");
+            const { openModal, closeModal } = setupModalEvents();
+
+            const carEditFormWrapper =
+              document.querySelector("#edit-car-form");
+            
             const productsWrapper = dashboardContent.querySelector(
               "tbody.products-list",
             );
             const addProductBtn =
               dashboardContent.querySelector(".add-product");
 
+
             renderProducts(productsWrapper, products);
 
             productsWrapper.addEventListener("click", (e) => {
+
               if (e.target.classList.contains("remove")) {
                 const productId = e.target
                   .closest(".actions")
@@ -702,6 +712,31 @@ document.addEventListener("DOMContentLoaded", async () => {
                 products = products.filter((p) => p.id !== productId);
                 saveDataToLocalStorage("cars", products);
                 renderProducts(productsWrapper, products);
+              }
+              if (e.target.classList.contains("edit")) {
+                const carId = e.target
+                  .closest(".actions")
+                  .getAttribute("data-id");
+                const carToEdit = products.find((p) => p.id === carId);
+                if (carToEdit) {
+                  document.getElementById("edit-car-image").value = carToEdit.image;
+                  document.getElementById("edit-car-brand").value = carToEdit.brand;
+                  document.getElementById("edit-car-model").value = carToEdit.model;
+                  document.getElementById("edit-car-type").value = carToEdit.type;
+                  document.getElementById("edit-car-price").value = carToEdit.pricePerDay;
+                  document.getElementById("edit-car-transmission").value = carToEdit.transmission;
+                  document.getElementById("edit-car-fuel").value = carToEdit.fuelCapacity;
+                  document.getElementById("edit-car-seats").value = carToEdit.seats;
+                  document.getElementById("edit-car-available").value = carToEdit.available;
+
+                  // Clear previous error states
+                  document
+                    .querySelectorAll("#edit-car-form .form-group")
+                    .forEach((g) => g.classList.remove("has-error"));
+
+                  openModal();
+                }
+
               }
             });
 
