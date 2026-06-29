@@ -1,4 +1,5 @@
-const bcrypt = window.dcodeIO.bcrypt;
+const bcrypt = window.dcodeIO ? window.dcodeIO.bcrypt : "";
+
 import { fetchData } from "./api.js";
 import {
   saveDataToLocalStorage,
@@ -24,8 +25,8 @@ import {
   togglePasswordVisibility,
   renderHeaderCta,
   renderUsers,
-  renderEditUserModal,
-  setupEditUserModalEvents,
+  renderModal,
+  setupModalEvents,
   renderProducts,
 } from "./ui.js";
 import areObjectsEqual from "./utils.js";
@@ -367,10 +368,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Render modal HTML into the DOM (once) and wire open/close events
-    renderEditUserModal();
-    const { openModal, closeModal } = setupEditUserModalEvents();
-
     const transactionsContainer = document.getElementById(
       "recent-transactions",
     );
@@ -545,6 +542,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             let users = await getDataFromLocalStorage("users");
             const usersWrapper =
               dashboardContent.querySelector("tbody.users-list");
+            // Render modal HTML into the DOM (once) and wire open/close events
+
+            renderModal("edit-user");
+            const { openModal, closeModal } = setupModalEvents();
+
             const userEditFormWrapper =
               document.querySelector("#edit-user-form");
 
@@ -705,7 +707,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             addProductBtn.addEventListener("click", () => {
               console.log(addProductBtn);
-              
             });
           }
         }

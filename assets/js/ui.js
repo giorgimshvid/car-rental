@@ -274,14 +274,16 @@ export function renderProducts(wrapper, products) {
  * Injects the Edit User modal HTML into the DOM (only once).
  * Returns the modal overlay element.
  */
-export function renderEditUserModal() {
+export function renderModal(modalCondition) {
   const existing = document.getElementById("edit-user-modal");
   if (existing) return existing;
 
   const modal = document.createElement("div");
-  modal.id = "edit-user-modal";
   modal.className = "modal-overlay";
-  modal.innerHTML = `
+  switch (modalCondition) {
+    case 'edit-user' : 
+    modal.id = "edit-user-modal";
+    modal.innerHTML = `
     <div class="modal-box">
       <div class="modal-header">
         <h3>Edit User</h3>
@@ -336,6 +338,17 @@ export function renderEditUserModal() {
       </form>
     </div>
   `;
+       break
+    case case2 :
+       break
+    case case3 :
+      break
+    case case4 :
+        break
+   default :     
+
+  }
+  
 
   document.body.appendChild(modal);
   return modal;
@@ -347,7 +360,7 @@ export function renderEditUserModal() {
  * @param {Function} onClose - optional callback when modal closes
  * @returns {{ openModal: Function, closeModal: Function }}
  */
-export function setupEditUserModalEvents(onOpen, onClose) {
+export function setupModalEvents(onOpen, onClose) {
   const modal = document.getElementById("edit-user-modal");
   if (!modal) return {};
 
