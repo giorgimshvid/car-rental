@@ -545,12 +545,6 @@ document.addEventListener("DOMContentLoaded", async () => {
               dashboardContent.querySelector("tbody.users-list");
             // Render modal HTML into the DOM (once) and wire open/close events
 
-            renderModal("edit-user");
-            const { openModal, closeModal } = setupModalEvents();
-
-            const userEditFormWrapper =
-              document.querySelector("#edit-user-form");
-
             renderUsers(usersWrapper, users);
 
             usersWrapper.addEventListener("click", (e) => {
@@ -564,147 +558,140 @@ document.addEventListener("DOMContentLoaded", async () => {
               }
 
               if (e.target.classList.contains("edit")) {
+                renderModal("edit-user");
+                const { openModal, closeModal } = setupModalEvents();
+
+                const formWrapper = document.querySelector("#edit-user-form");
+
                 const userId = e.target
                   .closest(".actions")
                   .getAttribute("data-id");
                 const userToEdit = users.find((u) => u.id === userId);
                 if (userToEdit) {
-                  document.getElementById("edit-user-id").value = userToEdit.id;
-                  document.getElementById("edit-firstname").value =
+                  formWrapper.querySelector("#user-id").value = userToEdit.id;
+                  formWrapper.querySelector("#firstname").value =
                     userToEdit.firstName;
-                  document.getElementById("edit-lastname").value =
+                  formWrapper.querySelector("#lastname").value =
                     userToEdit.lastName;
-                  document.getElementById("edit-email").value =
-                    userToEdit.email;
-                  document.getElementById("edit-role").value = userToEdit.role;
-                  document.getElementById("edit-image").value =
+                  formWrapper.querySelector("#email").value = userToEdit.email;
+                  formWrapper.querySelector("#role").value = userToEdit.role;
+                  formWrapper.querySelector("#image").value =
                     userToEdit.profilePhotoUrl;
 
                   // Clear previous error states
-                  document
-                    .querySelectorAll("#edit-user-form .form-group")
+                  formWrapper
+                    .querySelectorAll(".form-group")
                     .forEach((g) => g.classList.remove("has-error"));
 
                   openModal();
                 }
-              }
-            });
 
-            userEditFormWrapper.addEventListener("submit", async (e) => {
-              const userId =
-                userEditFormWrapper.querySelector("#edit-user-id").value;
-              const oldUser = users.find((user) => user.id === userId);
+                formWrapper.addEventListener("submit", async (e) => {
+                  const userId = formWrapper.querySelector("#user-id").value;
+                  const oldUser = users.find((user) => user.id === userId);
 
-              const firstName =
-                userEditFormWrapper.querySelector("#edit-firstname").value;
-              const lastName =
-                userEditFormWrapper.querySelector("#edit-lastname").value;
-              const email =
-                userEditFormWrapper.querySelector("#edit-email").value;
-              const password =
-                userEditFormWrapper.querySelector("#edit-password").value;
-              const image =
-                userEditFormWrapper.querySelector("#edit-image").value;
-              const role =
-                userEditFormWrapper.querySelector("#edit-role").value;
+                  const firstName =
+                    formWrapper.querySelector("#firstname").value;
+                  const lastName = formWrapper.querySelector("#lastname").value;
+                  const email = formWrapper.querySelector("#email").value;
+                  const password = formWrapper.querySelector("#password").value;
+                  const image = formWrapper.querySelector("#image").value;
+                  const role = formWrapper.querySelector("#role").value;
 
-              const firstNameValidation = validateName(firstName.trim());
-              if (!firstNameValidation) {
-                console.log("error validating firstname");
-                return;
-              }
-              const lastNameValidation = validateName(lastName.trim());
-              if (!lastNameValidation) {
-                console.log("erorr validating lastname");
-                return;
-              }
-
-              if (image) {
-                const imageValidation = await validateImageURL(image);
-                if (!imageValidation) {
-                  console.log("Error validating the image URL");
-                  return;
-                }
-              }
-
-              if (email !== oldUser.email) {
-                const emailValidation = validateEmail(email.trim());
-                if (!emailValidation) {
-                  console.log("error validating email");
-                  return;
-                }
-
-                const userExists = checkExistingUser(
-                  email.trim(),
-                  (await getDataFromLocalStorage("users")) || [],
-                );
-                if (userExists) {
-                  console.log("User with this email already exists");
-                  return;
-                }
-              }
-
-              let hashedPassword = undefined;
-              if (password) {
-                const passwordValidation = validatePassword(password);
-                if (!passwordValidation) {
-                  console.log("error validating password");
-                  return;
-                }
-
-                hashedPassword = await hashPassword(password);
-              }
-
-              const newUser = new User(
-                firstName,
-                lastName,
-                email,
-                hashedPassword || oldUser.password,
-                role,
-                image,
-              );
-              newUser.id = oldUser.id;
-              newUser.createdAt = oldUser.createdAt;
-
-              if (!areObjectsEqual(newUser, oldUser)) {
-                users = users.map((user) => {
-                  if (user.id === userId) {
-                    return newUser;
+                  const firstNameValidation = validateName(firstName.trim());
+                  if (!firstNameValidation) {
+                    console.log("error validating firstname");
+                    return;
                   }
-                  return user;
+                  const lastNameValidation = validateName(lastName.trim());
+                  if (!lastNameValidation) {
+                    console.log("erorr validating lastname");
+                    return;
+                  }
+
+                  if (image) {
+                    console.log(image);
+                    const imageValidation = await validateImageURL(image);
+                    if (!imageValidation) {
+                      console.log("Error validating the image URL");
+                      return;
+                    }
+                  }
+
+                  if (email !== oldUser.email) {
+                    const emailValidation = validateEmail(email.trim());
+                    if (!emailValidation) {
+                      console.log("error validating email");
+                      return;
+                    }
+
+                    const userExists = checkExistingUser(
+                      email.trim(),
+                      (await getDataFromLocalStorage("users")) || [],
+                    );
+                    if (userExists) {
+                      console.log("User with this email already exists");
+                      return;
+                    }
+                  }
+
+                  let hashedPassword = undefined;
+                  if (password) {
+                    const passwordValidation = validatePassword(password);
+                    if (!passwordValidation) {
+                      console.log("error validating password");
+                      return;
+                    }
+
+                    hashedPassword = await hashPassword(password);
+                  }
+
+                  const newUser = new User(
+                    firstName,
+                    lastName,
+                    email,
+                    hashedPassword || oldUser.password,
+                    role,
+                    image,
+                  );
+                  newUser.id = oldUser.id;
+                  newUser.createdAt = oldUser.createdAt;
+
+                  if (!areObjectsEqual(newUser, oldUser)) {
+                    users = users.map((user) => {
+                      if (user.id === userId) {
+                        return newUser;
+                      }
+                      return user;
+                    });
+
+                    await saveDataToLocalStorage("users", users);
+                    renderUsers(usersWrapper, users);
+                    console.log("User data has been updated.");
+                  } else {
+                    console.log("New user data is same as old user data.");
+                  }
+
+                  closeModal();
                 });
-
-                await saveDataToLocalStorage("users", users);
-                renderUsers(usersWrapper, users);
-                console.log("User data has been updated.");
-              } else {
-                console.log("New user data is same as old user data.");
               }
-
-              closeModal();
             });
           }
 
           if (newTab === "products") {
             let products = await getDataFromLocalStorage("cars");
-            
-            renderModal("edit-car");
-            const { openModal, closeModal } = setupModalEvents();
 
-            const carEditFormWrapper =
-              document.querySelector("#edit-car-form");
-            
+            const carEditFormWrapper = document.querySelector("#edit-car-form");
+
             const productsWrapper = dashboardContent.querySelector(
               "tbody.products-list",
             );
             const addProductBtn =
               dashboardContent.querySelector(".add-product");
 
-
             renderProducts(productsWrapper, products);
 
             productsWrapper.addEventListener("click", (e) => {
-
               if (e.target.classList.contains("remove")) {
                 const productId = e.target
                   .closest(".actions")
@@ -714,34 +701,50 @@ document.addEventListener("DOMContentLoaded", async () => {
                 renderProducts(productsWrapper, products);
               }
               if (e.target.classList.contains("edit")) {
+                renderModal("edit-car");
+                const { openModal, closeModal } = setupModalEvents();
+
+                const formWrapper = document.querySelector("#edit-car-form");
+
                 const carId = e.target
                   .closest(".actions")
                   .getAttribute("data-id");
                 const carToEdit = products.find((p) => p.id === carId);
                 if (carToEdit) {
-                  document.getElementById("edit-car-image").value = carToEdit.image;
-                  document.getElementById("edit-car-brand").value = carToEdit.brand;
-                  document.getElementById("edit-car-model").value = carToEdit.model;
-                  document.getElementById("edit-car-type").value = carToEdit.type;
-                  document.getElementById("edit-car-price").value = carToEdit.pricePerDay;
-                  document.getElementById("edit-car-transmission").value = carToEdit.transmission;
-                  document.getElementById("edit-car-fuel").value = carToEdit.fuelCapacity;
-                  document.getElementById("edit-car-seats").value = carToEdit.seats;
-                  document.getElementById("edit-car-available").value = carToEdit.available;
+                  formWrapper.querySelector("#car-image").value =
+                    carToEdit.image;
+                  formWrapper.querySelector("#car-brand").value =
+                    carToEdit.brand;
+                  formWrapper.querySelector("#car-model").value =
+                    carToEdit.model;
+                  formWrapper.querySelector("#car-type").value = carToEdit.type;
+                  formWrapper.querySelector("#car-price").value =
+                    carToEdit.pricePerDay;
+                  formWrapper.querySelector("#car-transmission").value =
+                    carToEdit.transmission;
+                  formWrapper.querySelector("#car-fuel").value =
+                    carToEdit.fuelCapacity;
+                  formWrapper.querySelector("#car-seats").value =
+                    carToEdit.seats;
+                  formWrapper.querySelector("#car-available").value =
+                    carToEdit.available;
 
                   // Clear previous error states
-                  document
-                    .querySelectorAll("#edit-car-form .form-group")
+                  formWrapper
+                    .querySelectorAll(".form-group")
                     .forEach((g) => g.classList.remove("has-error"));
 
                   openModal();
                 }
-
               }
             });
 
             addProductBtn.addEventListener("click", () => {
               console.log(addProductBtn);
+              renderModal("create-car");
+              const { openModal, closeModal } = setupModalEvents();
+
+              openModal();
             });
           }
         }

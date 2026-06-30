@@ -103,8 +103,9 @@ export function togglePasswordVisibility(wrapper) {
 
 export function renderHeaderCta(wrapper, user) {
   const ctaContent = `
-    ${user
-      ? `
+    ${
+      user
+        ? `
       <div class="cta-btns">
         <a href="">
           <img
@@ -138,15 +139,16 @@ export function renderHeaderCta(wrapper, user) {
         </div>
       </div>
     `
-      : ""
+        : ""
     }
-    ${user
-      ? `
+    ${
+      user
+        ? `
       <div class="cta-auth-btns">
         <button class="logout-btn">Log out</button>
       </div>
     `
-      : `
+        : `
       <div class="cta-auth-btns">
         <a href="sign-up.html">Sign up</a>
         <a href="sign-in.html">Sign in</a>
@@ -276,15 +278,10 @@ export function renderModal(modalCondition) {
   const existing = document.getElementById("edit-user-modal");
   if (existing) return existing;
 
-  const modal = document.createElement("div");
-  modal.className = "modal-overlay";
-  switch (modalCondition) {
-    case 'edit-user':
-      modal.id = "edit-user-modal";
-      modal.innerHTML = `
+  const userModal = `
         <div class="modal-box">
           <div class="modal-header">
-            <h3>Edit User</h3>
+            <h3>${modalCondition === "edit-user" ? "Edit" : "Create"} User</h3>
             <button class="modal-close-btn" id="close-modal-btn" aria-label="Close modal">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -293,37 +290,37 @@ export function renderModal(modalCondition) {
               </svg>
             </button>
           </div>
-          <form class="modal-form" id="edit-user-form" novalidate>
-            <input type="hidden" id="edit-user-id" />
+          <form class="modal-form" id="${modalCondition === "edit-user" ? "edit" : "create"}-user-form" novalidate>
+            <input type="hidden" id="user-id" />
             <div class="form-group">
-              <label for="edit-firstname">First Name</label>
-              <input type="text" id="edit-firstname" placeholder="Enter first name" required />
+              <label for="firstname">First Name</label>
+              <input type="text" id="firstname" placeholder="Enter first name" required />
               <span class="error-msg" id="error-firstname">First name must be between 2 and 50 letters.</span>
             </div>
             <div class="form-group">
-              <label for="edit-lastname">Last Name</label>
-              <input type="text" id="edit-lastname" placeholder="Enter last name" required />
+              <label for="lastname">Last Name</label>
+              <input type="text" id="lastname" placeholder="Enter last name" required />
               <span class="error-msg" id="error-lastname">Last name must be between 2 and 50 letters.</span>
             </div>
             <div class="form-group">
-              <label for="edit-email">Email Address</label>
-              <input type="email" id="edit-email" placeholder="Enter email address" required />
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="Enter email address" required />
               <span class="error-msg" id="error-email">Please enter a valid email address.</span>
               <span class="error-msg" id="error-email-exists">This email is already in use.</span>
             </div>
             <div class="form-group">
-              <label for="edit-password">Password</label>
-              <input type="text" id="edit-password" placeholder="Enter password" required />
+              <label for="password">Password</label>
+              <input type="text" id="password" placeholder="Enter password" required />
               <span class="error-msg" id="error-password">Please enter a valid password.</span>
             </div>
             <div class="form-group">
-              <label for="edit-image">Image</label>
-              <input type="text" id="edit-image" placeholder="Enter image URL" required />
+              <label for="image">Image</label>
+              <input type="text" id="image" placeholder="Enter image URL" required />
               <span class="error-msg" id="error-image">Please enter a valid image URL.</span>
             </div>
             <div class="form-group">
-              <label for="edit-role">Role</label>
-              <select id="edit-role" required>
+              <label for="role">Role</label>
+              <select id="role" required>
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
               </select>
@@ -331,18 +328,16 @@ export function renderModal(modalCondition) {
             </div>
             <div class="modal-footer">
               <button type="button" class="modal-btn modal-btn-cancel" id="cancel-modal-btn">Cancel</button>
-              <button type="submit" class="modal-btn modal-btn-save">Save Changes</button>
+              <button type="submit" class="modal-btn modal-btn-save">${modalCondition === "edit-user" ? "Save Changes" : "Create User"}</button>
             </div>
           </form>
         </div>
       `;
-      break
-    case 'edit-car':
-      modal.id = "edit-car-modal";
-      modal.innerHTML = `
+
+  const carModal = `
         <div class="modal-box">
           <div class="modal-header">
-            <h3>Edit Car</h3>
+            <h3>${modalCondition === "edit-car" ? "Edit" : "Create"} Car</h3>
             <button class="modal-close-btn" id="close-modal-btn" aria-label="Close modal">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -351,21 +346,21 @@ export function renderModal(modalCondition) {
               </svg>
             </button>
           </div>
-          <form class="modal-form" id="edit-car-form" novalidate>
-            <input type="hidden" id="edit-car-id" />
+          <form class="modal-form" id="${modalCondition === "edit-car" ? "edit" : "create"}-car-form" novalidate>
+            <input type="hidden" id="car-id" />
             <div class="form-group">
-              <label for="edit-car-brand">Brand</label>
-              <input type="text" id="edit-car-brand" placeholder="Enter brand" required />
+              <label for="car-brand">Brand</label>
+              <input type="text" id="car-brand" placeholder="Enter brand" required />
               <span class="error-msg" id="error-car-brand">Brand must be between 2 and 50 characters.</span>
             </div>
             <div class="form-group">
-              <label for="edit-car-model">Model</label>
-              <input type="text" id="edit-car-model" placeholder="Enter model" required />
+              <label for="car-model">Model</label>
+              <input type="text" id="car-model" placeholder="Enter model" required />
               <span class="error-msg" id="error-car-model">Model must be between 2 and 100 characters.</span>
             </div>
             <div class="form-group">
-              <label for="edit-car-type">Type</label>
-              <select id="edit-car-type" required>
+              <label for="car-type">Type</label>
+              <select id="car-type" required>
                 <option value="sedan">Sedan</option>
                 <option value="suv">SUV</option>
                 <option value="hatchback">Hatchback</option>
@@ -377,36 +372,36 @@ export function renderModal(modalCondition) {
               <span class="error-msg" id="error-car-type">Please select a valid car type.</span>
             </div>
             <div class="form-group">
-              <label for="edit-car-price">Price Per Day ($)</label>
-              <input type="number" id="edit-car-price" placeholder="Enter price per day" min="1" required />
+              <label for="car-price">Price Per Day ($)</label>
+              <input type="number" id="car-price" placeholder="Enter price per day" min="1" required />
               <span class="error-msg" id="error-car-price">Price must be a positive number.</span>
             </div>
             <div class="form-group">
-              <label for="edit-car-image">Image URL</label>
-              <input type="text" id="edit-car-image" placeholder="Enter image URL" required />
+              <label for="car-image">Image URL</label>
+              <input type="text" id="car-image" placeholder="Enter image URL" required />
               <span class="error-msg" id="error-car-image">Please enter a valid image URL.</span>
             </div>
             <div class="form-group">
-              <label for="edit-car-transmission">Transmission</label>
-              <select id="edit-car-transmission" required>
+              <label for="car-transmission">Transmission</label>
+              <select id="car-transmission" required>
                 <option value="Automatic">Automatic</option>
                 <option value="Manual">Manual</option>
               </select>
               <span class="error-msg" id="error-car-transmission">Please select a valid transmission type.</span>
             </div>
             <div class="form-group">
-              <label for="edit-car-fuel">Fuel Capacity (L)</label>
-              <input type="number" id="edit-car-fuel" placeholder="Enter fuel capacity" min="1" required />
+              <label for="car-fuel">Fuel Capacity (L)</label>
+              <input type="number" id="car-fuel" placeholder="Enter fuel capacity" min="1" required />
               <span class="error-msg" id="error-car-fuel">Fuel capacity must be a positive number.</span>
             </div>
             <div class="form-group">
-              <label for="edit-car-seats">Seats</label>
-              <input type="number" id="edit-car-seats" placeholder="Enter number of seats" min="1" max="20" required />
+              <label for="car-seats">Seats</label>
+              <input type="number" id="car-seats" placeholder="Enter number of seats" min="1" max="20" required />
               <span class="error-msg" id="error-car-seats">Seats must be between 1 and 20.</span>
             </div>
             <div class="form-group">
-              <label for="edit-car-available">Available</label>
-              <select id="edit-car-available" required>
+              <label for="car-available">Available</label>
+              <select id="car-available" required>
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
@@ -414,20 +409,33 @@ export function renderModal(modalCondition) {
             </div>
             <div class="modal-footer">
               <button type="button" class="modal-btn modal-btn-cancel" id="cancel-modal-btn">Cancel</button>
-              <button type="submit" class="modal-btn modal-btn-save">Save Changes</button>
+              <button type="submit" class="modal-btn modal-btn-save">${modalCondition === "edit-car" ? "Save Changes" : "Create Car"}</button>
             </div>
           </form>
         </div>
       `;
-      break
-    case case3:
-      break
-    case case4:
-      break
+
+  const modal = document.createElement("div");
+  modal.className = "modal-overlay";
+  switch (modalCondition) {
+    case "edit-user":
+      modal.id = "edit-user-modal";
+      modal.innerHTML = userModal;
+      break;
+    case "edit-car":
+      modal.id = "edit-car-modal";
+      modal.innerHTML = carModal;
+      break;
+    case "create-user":
+      modal.id = "create-user-modal";
+      modal.innerHTML = userModal;
+      break;
+    case "create-car":
+      modal.id = "create-car-modal";
+      modal.innerHTML = carModal;
+      break;
     default:
-
   }
-
 
   document.body.appendChild(modal);
   return modal;
@@ -444,11 +452,14 @@ export function setupModalEvents(onOpen, onClose) {
   if (!modal) return {};
 
   const closeModal = () => {
+    document.body.style.overflow = "initial";
     modal.classList.remove("active");
+    modal.remove();
     if (typeof onClose === "function") onClose();
   };
 
   const openModal = () => {
+    document.body.style.overflow = "hidden";
     modal.classList.add("active");
     if (typeof onOpen === "function") onOpen();
   };

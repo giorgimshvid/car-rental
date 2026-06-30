@@ -1041,14 +1041,16 @@
 
       .modal-form {
         display: flex;
-        flex-direction: column;
-        gap: 20px;
+        justify-content: space-between;
+        flex-wrap: wrap;
       }
 
       .modal-form .form-group {
         display: flex;
         flex-direction: column;
+        flex-basis: 48%;
         gap: 6px;
+        margin-bottom: 20px;
       }
 
       .modal-form .form-group label {
@@ -1102,6 +1104,8 @@
         display: flex;
         justify-content: flex-end;
         gap: 12px;
+        width: 100%;
+        margin-top: 30px;
       }
 
       .modal-btn {
