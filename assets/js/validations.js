@@ -20,16 +20,15 @@ function validatePasswordMatch(password, retypePassword) {
 }
 
 async function validateImageURL(imageURL) {
-  try {
-    const response = await fetch(imageURL);
-    if (response.status === 404) {
-      return false;
-    }
-    return true;
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
+  
+     return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = imageURL;
+  });
+ 
+ 
 }
 
 function checkExistingUser(email, users) {

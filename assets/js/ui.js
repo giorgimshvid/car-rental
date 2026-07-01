@@ -368,6 +368,10 @@ export function renderModal(modalCondition) {
                 <option value="pickup">Pickup</option>
                 <option value="minivan">Minivan</option>
                 <option value="coupe">Coupe</option>
+                 <option value="sport">Sport</option>
+                <option value="supercar">Supercar</option>
+
+
               </select>
               <span class="error-msg" id="error-car-type">Please select a valid car type.</span>
             </div>

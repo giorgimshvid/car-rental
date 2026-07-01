@@ -610,7 +610,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                   }
 
                   if (image) {
-                    console.log(image);
                     const imageValidation = await validateImageURL(image);
                     if (!imageValidation) {
                       console.log("Error validating the image URL");
@@ -711,23 +710,32 @@ document.addEventListener("DOMContentLoaded", async () => {
                   .getAttribute("data-id");
                 const carToEdit = products.find((p) => p.id === carId);
                 if (carToEdit) {
-                  formWrapper.querySelector("#car-image").value =
-                    carToEdit.image;
-                  formWrapper.querySelector("#car-brand").value =
-                    carToEdit.brand;
-                  formWrapper.querySelector("#car-model").value =
-                    carToEdit.model;
-                  formWrapper.querySelector("#car-type").value = carToEdit.type;
-                  formWrapper.querySelector("#car-price").value =
-                    carToEdit.pricePerDay;
-                  formWrapper.querySelector("#car-transmission").value =
-                    carToEdit.transmission;
-                  formWrapper.querySelector("#car-fuel").value =
-                    carToEdit.fuelCapacity;
-                  formWrapper.querySelector("#car-seats").value =
-                    carToEdit.seats;
-                  formWrapper.querySelector("#car-available").value =
-                    carToEdit.available;
+                  const image = formWrapper.querySelector("#car-image");
+
+                  image.value = carToEdit.image;
+                  const brand = formWrapper.querySelector("#car-brand");
+                  brand.value = carToEdit.brand;
+
+                  const model = formWrapper.querySelector("#car-model");
+                  model.value = carToEdit.model;
+
+                  const type = formWrapper.querySelector("#car-type");
+                  type.value = carToEdit.type;
+
+                  const price = formWrapper.querySelector("#car-price");
+                  price.value = carToEdit.pricePerDay;
+
+                  const transmission = formWrapper.querySelector("#car-transmission");
+                  transmission.value = carToEdit.transmission;
+
+                  const fuel = formWrapper.querySelector("#car-fuel");
+                  fuel.value = carToEdit.fuelCapacity;
+
+                  const seats = formWrapper.querySelector("#car-seats");
+                  seats.value = carToEdit.seats;
+
+                  const available = formWrapper.querySelector("#car-available");
+                  available.value = carToEdit.available;
 
                   // Clear previous error states
                   formWrapper
@@ -736,6 +744,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                   openModal();
                 }
+                formWrapper.addEventListener("submit", async () => {
+                  
+                });
               }
             });
 
